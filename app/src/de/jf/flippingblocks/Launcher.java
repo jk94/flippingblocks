@@ -3,6 +3,7 @@ package de.jf.flippingblocks;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.widget.Toast;
 
 public class Launcher extends Activity {
 
@@ -17,7 +18,14 @@ public class Launcher extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.launcher, menu);
+        System.out.println("Test");
         return true;
     }
     
+    public void toastie(){
+    	Toast t = new Toast(this);
+    	t.setText("Guten Tag");
+    	t.setDuration(2000);
+    	t.show();
+    }
 }
