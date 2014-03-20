@@ -59,11 +59,10 @@ public class Launcher extends Activity {
     	
     	Button btn = new Button(this);
     	btn.setText("Start the Game");
-    	
-    
+    	   
     	
     	mainLayout.addView(btn);
-    	
+    	this.toastie();
     	
     }
 
@@ -76,9 +75,6 @@ public class Launcher extends Activity {
     }
     
     public void toastie(){
-    	Toast t = new Toast(this);
-    	t.setText("Guten Tag");
-    	t.setDuration(2000);
-    	t.show();
+    	Toast.makeText(this, "Guten Tag", Toast.LENGTH_LONG).show();
     }
 }
