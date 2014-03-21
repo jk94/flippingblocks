@@ -35,9 +35,9 @@ public class Spielfeld {
 		return erg;
 	}
 	
-	public ArrayList<Block> checkMates(Block b){
+	public ArrayList<Block> checkMates(Block b, Block calledBlock){
 		ArrayList<Block> erg = new ArrayList<Block>();
-		int x, y;
+		int x=-1, y=-1;
 		boolean posfound=false;
 		for(int i=0;i<blocklist.size();i++){
 			for(int i2=0;i2<blocklist.get(i).size();i2++){
@@ -52,6 +52,8 @@ public class Spielfeld {
 				break;
 			}
 		}
+		
+		
 		return erg;
 	}
 
