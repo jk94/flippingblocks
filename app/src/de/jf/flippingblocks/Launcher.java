@@ -55,7 +55,7 @@ public class Launcher extends Activity {
     public void initialise(){
     	LinearLayout mainLayout = new LinearLayout(this);
     	mainLayout.setBackgroundColor(Color.BLACK);
-    this.setContentView(mainLayout);
+    	this.setContentView(mainLayout);
     	
     	Button btn = new Button(this);
     	btn.setText("Start the Game");
