@@ -2,6 +2,8 @@ package de.jf.flippingblocks.spielelemente;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+import de.jf.flippingblocks.Enum.EnumColor;
 import de.jf.flippingblocks.graphics.BlockPanel;
 
 public class Spielfeld {
@@ -11,12 +13,22 @@ public class Spielfeld {
 	private int borderX, borderY;
 
 	public Spielfeld(int sizex, int sizey) {
+		Log.d("Spielfeld", "Start");
 		borderX = sizex;
 		borderY = sizey;
 		blocklist = new ArrayList<ArrayList<Block>>(borderX);
 		for (ArrayList<Block> a : blocklist) {
 			a = new ArrayList<Block>(borderY);
 		}
+		for (int i = 0; i < blocklist.size(); i++) {
+			for (int t = 0; t < blocklist.get(i).size(); t++) {
+				int color = (int) (1 + (Math.random() * 13));
+				Block b = new Block(color);
+				blocklist.get(i).add(b);
+				Log.d("Spielfeld", i + "/" + t + " " + color);
+			}
+		}
+
 	}
 
 	// finding Block by the Reference of its (clicked) Button
@@ -109,5 +121,3 @@ public class Spielfeld {
 	}
 
 }
-
-

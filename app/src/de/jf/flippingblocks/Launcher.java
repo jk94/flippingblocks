@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import de.jf.flippingblocks.spielelemente.Spielfeld;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,6 +38,7 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -73,7 +75,6 @@ public class Launcher extends Activity {
         this.getActionBar().setHomeButtonEnabled(true);
     	this.getActionBar().setTitle("Flipping Blocks");
     	
-    
     	
     	
     	// defining the Layout
