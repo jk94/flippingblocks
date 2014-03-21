@@ -20,6 +20,11 @@ public class Block {
 	public void setColor(EnumColor color) {
 		this.color = color;
 	}
+	
+	public Block(int color){
+		this.btn = null;
+		this.color = EnumColor.RED;
+	}
 
 	public BlockPanel getBtn() {
 		return btn;

@@ -1,10 +1,31 @@
 package de.jf.flippingblocks;
 
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import de.jf.flippingblocks.spielelemente.Spielfeld;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.UserHandle;
+
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+
 import android.os.Bundle;
 import android.view.GestureDetector;
+
+import android.graphics.drawable.Drawable;
+import android.util.Log;
+import android.view.Display;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -78,6 +99,7 @@ public class Launcher extends Activity implements OnClickListener {
 		    }
 	};
 	
+
 	//add gesture listener
 	
 	mainLayout.setOnTouchListener(gesture);
@@ -98,19 +120,11 @@ public class Launcher extends Activity implements OnClickListener {
 		mainLayout.addView(sideMenuContent);
 		mainLayout.addView(mainContent);
 
-		Button temp = generateButton("Start the game", new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-
-			}
-		});
-		mainContent.addView(temp);
-
-		temp = generateButton("Options", null);
-		sideMenuContent.addView(temp);
-
+		sideMenuContent.addView(generateButton("Option", null));
+		mainContent.addView(generateButton("Start game", null));
+		
 	}
+
 
 	public Button generateButton(String name, OnClickListener listener) {
 		Button button = new Button(this);
@@ -118,6 +132,8 @@ public class Launcher extends Activity implements OnClickListener {
 		button.setOnClickListener(listener);
 		return button;
 	}
+	
+		
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -158,4 +174,4 @@ public class Launcher extends Activity implements OnClickListener {
 		
 	}
 
-}
+		}
