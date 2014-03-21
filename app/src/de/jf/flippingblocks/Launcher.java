@@ -59,11 +59,10 @@ public class Launcher extends Activity {
     	
     	Button btn = new Button(this);
     	btn.setText("Start the Game");
-    	
-    
+    	   
     	
     	mainLayout.addView(btn);
-    	
+    	this.toastie();
     	
     }
 
@@ -71,7 +70,11 @@ public class Launcher extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.launcher, menu);
+        System.out.println("Test");
         return true;
     }
     
+    public void toastie(){
+    	Toast.makeText(this, "Guten Tag", Toast.LENGTH_LONG).show();
+    }
 }
