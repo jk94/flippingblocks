@@ -1,11 +1,12 @@
 package de.jf.flippingblocks;
 
 
-import android.graphics.*;
-
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -16,9 +17,11 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
-
+import de.jf.flippingblocks.gameGui.GameGui;
+import de.jf.flippingblocks.gestures.MoveMenu;
+import de.jf.flippingblocks.gestures.SwipeGesture;
+import de.jf.flippingblocks.graphics.GUI_Element_Creator;
 import de.jf.flippingblocks.graphics.ResizeAnimation;
-import de.jf.flippingblocks.gestures.*;
 
 
 public class Launcher extends Activity implements OnClickListener {
@@ -28,12 +31,11 @@ public class Launcher extends Activity implements OnClickListener {
 	LinearLayout mainContent;
 	LinearLayout sideMenuContent;
 	SwipeGesture gestureListener;
-
+	
+	
 	// muss dringend dynamisch gemacht werden
-	final float layoutWidth = 400;
-	final float widthHidden = 50;
-	final int menu_margin = 5;
-	final int content_margin = 50;
+	
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,21 +55,21 @@ public class Launcher extends Activity implements OnClickListener {
 		
 
 		// initialize the Layout
-		mainLayout = new GridLayout(this);
-		mainContent = new LinearLayout(this);
-		sideMenuContent = new LinearLayout(this);
+		mainLayout = GUI_Element_Creator.generateMainLayout(this);
+		mainContent =GUI_Element_Creator.generateLauncherField(this);
+		sideMenuContent = GUI_Element_Creator.generateSideMenu(this);
 		
 
 		SwipeGesture gesture = new SwipeGesture(this) {
 
 			@Override
 			public void onSwipeRight() {
-				moveMenuInOut();
+				MoveMenu.enlargeMenu(sideMenuContent);
 			}
 
 			@Override
 			public void onSwipeLeft() {
-				moveMenuInOut();
+				MoveMenu.minimizeMenu(sideMenuContent);
 			}
 
 			@Override
@@ -84,99 +86,32 @@ public class Launcher extends Activity implements OnClickListener {
 		mainLayout.setOnTouchListener(gesture);
 		mainContent.setOnTouchListener(gesture);
 		sideMenuContent.setOnTouchListener(gesture);
-		// define mainLayout
-		mainLayout.setBackgroundColor(Color.BLACK);
-		mainLayout.setOrientation(0);
-
-		// define sideMenuContent
-		sideMenuContent.setBackgroundColor(Color.DKGRAY);
-		sideMenuContent.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
-		sideMenuContent.setGravity(Gravity.LEFT);
-		sideMenuContent.setOrientation(LinearLayout.VERTICAL);
-		// sideMenuContent.getBackground().setColorFilter(Color.DKGRAY,
-		// PorterDuff.Mode.LIGHTEN);
-
-		// define mainContent
-		// mainContent.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
-		mainContent.setGravity(Gravity.CENTER_HORIZONTAL);
-		mainContent.setBackgroundColor(Color.BLACK);
-		mainContent.setOrientation(LinearLayout.VERTICAL);
-		mainContent.setVerticalGravity(Gravity.CENTER_VERTICAL);
-		mainContent.setDividerPadding(200);
-
-		// adding Components to different Components
+		
+		//filling with content
+		
+		
 		this.setContentView(mainLayout);
-
 		mainLayout.addView(sideMenuContent);
 		mainLayout.addView(mainContent);
 
-		sideMenuContent.addView(generateButton("Options", null, menu_margin,
-				true));
-		sideMenuContent
-				.addView(generateButton("Test2", null, menu_margin, true));
-
-		mainContent.addView(generateButton("Fieldsize: 3 x 3", null,
-				content_margin, false));
-		mainContent.addView(generateButton("Fieldsize: 5 x 5", null,
-				content_margin, false));
-		mainContent.addView(generateButton("Fieldsize: 7 x 7", null,
-				content_margin, false));
-
-		// //sideMenu ausblenden
-		LayoutParams params = sideMenuContent.getLayoutParams();
-		params.width = (int) (widthHidden);
-		params.height = LayoutParams.MATCH_PARENT;
-		sideMenuContent.setLayoutParams(params);
-		//
-		// //Content
-		params = mainContent.getLayoutParams();
-		params.height = LayoutParams.MATCH_PARENT;
-		params.width = LayoutParams.MATCH_PARENT;
-		mainContent.setLayoutParams(params);
-
-		// initialize GestureListener
-
-	}
-
-
-	public Button generateButton(String name, OnClickListener listener,
-			int margin, boolean widthMatchParent) {
-
-
-		Button button = new Button(this);
-		button.setText(name);
-		button.setOnClickListener(listener);
-		button.setTextColor(Color.CYAN);
-
-		button.setSingleLine();
-
 		
-		if(widthMatchParent){
-		button.getBackground().setColorFilter(Color.BLACK,
-				PorterDuff.Mode.MULTIPLY);
-		}else{
-			button.getBackground().setColorFilter(Color.GRAY,
-					PorterDuff.Mode.MULTIPLY);
-		}
+		sideMenuContent.addView(GUI_Element_Creator.generateButton(this, "Option", null, true));
+		sideMenuContent.addView(GUI_Element_Creator.generateButton(this, "Save", null, true));
+		sideMenuContent.addView(GUI_Element_Creator.generateButton(this, "Share", null, true));
+		sideMenuContent.addView(GUI_Element_Creator.generateButton(this, "Highscores", null, true));
+		
+		
+		mainContent.addView(GUI_Element_Creator.generateButton(this, "Fieldsize  3 x 3", generateModusListener("3x3"), false));
+		mainContent.addView(GUI_Element_Creator.generateButton(this, "Fieldsize  5 x 5", generateModusListener("5x5"), false));
+		mainContent.addView(GUI_Element_Creator.generateButton(this, "Fieldsize  7 x 7", generateModusListener("7x7"), false));
+		mainContent.addView(GUI_Element_Creator.generateButton(this, "Fieldsize  9 x 9", generateModusListener("9x9"), false));
+		mainContent.addView(GUI_Element_Creator.generateButton(this, "Fieldsize 11 x 11", generateModusListener("11x11"), false));
+		
 
-		LinearLayout.LayoutParams params;
-
-		if (widthMatchParent) {
-			params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
-					LayoutParams.WRAP_CONTENT);
-
-		} else {
-
-			params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
-					LayoutParams.WRAP_CONTENT);
-
-		}
-
-		params.bottomMargin = margin;
-		button.setLayoutParams(params);
-
-		return button;
 	}
+
+
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -195,19 +130,20 @@ public class Launcher extends Activity implements OnClickListener {
 	}
 
 	public void moveMenuInOut() {
+		//just for the toolbar at the top
 		LayoutParams temp = sideMenuContent.getLayoutParams();
-		System.out.println(temp.width);
+		
 
-		if (temp.width != widthHidden) {
+		if (temp.width != GUI_Element_Creator.sideMenuWidthHidden) {
 			ResizeAnimation animation = new ResizeAnimation(sideMenuContent,
-					(temp.width), (temp.height), widthHidden,
+					(temp.width), (temp.height), GUI_Element_Creator.sideMenuWidthHidden,
 					(temp.height));
 			sideMenuContent.startAnimation(animation);
 
 		} else {
 
 			ResizeAnimation animation = new ResizeAnimation(sideMenuContent,
-					(temp.width), (temp.height), layoutWidth,
+					(temp.width), (temp.height), GUI_Element_Creator.sideMenuWidthExpanded,
 					(temp.height));
 			sideMenuContent.startAnimation(animation);
 
@@ -218,6 +154,25 @@ public class Launcher extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public OnClickListener generateModusListener(String modus){
+		final String mod = modus;
+		return new OnClickListener() {
+			
+			
+			
+			@Override
+			public void onClick(View v) {
+				startNewGame(mod);
+				
+			}
+		};
+	}
+	
+	public void startNewGame(String modus){
+		Intent intent = new Intent(this,GameGui.class);
+		startActivity(intent);
 	}
 
 }
