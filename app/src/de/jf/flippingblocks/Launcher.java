@@ -1,11 +1,12 @@
 package de.jf.flippingblocks;
 
+
 import android.graphics.*;
-import android.os.Bundle;
+
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
-
+import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,8 +16,10 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+
 import de.jf.flippingblocks.graphics.ResizeAnimation;
 import de.jf.flippingblocks.gestures.*;
+
 
 public class Launcher extends Activity implements OnClickListener {
 
@@ -135,8 +138,10 @@ public class Launcher extends Activity implements OnClickListener {
 
 	}
 
+
 	public Button generateButton(String name, OnClickListener listener,
 			int margin, boolean widthMatchParent) {
+
 
 		Button button = new Button(this);
 		button.setText(name);
