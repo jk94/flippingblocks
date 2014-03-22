@@ -1,47 +1,20 @@
 package de.jf.flippingblocks;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-import de.jf.flippingblocks.spielelemente.Spielfeld;
-import android.net.Uri;
+import android.graphics.*;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.UserHandle;
-
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
-import android.content.res.ColorStateList;
 import android.graphics.Color;
-
-import android.os.Bundle;
-import android.view.GestureDetector;
-
-import android.graphics.drawable.Drawable;
-import android.text.Layout;
-import android.util.Log;
-import android.view.Display;
 
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
-import android.widget.ListAdapter;
-import android.widget.ListView;
 import de.jf.flippingblocks.graphics.ResizeAnimation;
 import de.jf.flippingblocks.gestures.*;
 
@@ -52,6 +25,12 @@ public class Launcher extends Activity implements OnClickListener {
 	LinearLayout mainContent;
 	LinearLayout sideMenuContent;
 	SwipeGesture gestureListener;
+
+	// muss dringend dynamisch gemacht werden
+	final float layoutWidth = 400;
+	final float widthHidden = 50;
+	final int menu_margin = 5;
+	final int content_margin = 50;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,32 +43,35 @@ public class Launcher extends Activity implements OnClickListener {
 
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-
-		
 		// defining ActionBar
 		this.getActionBar().setDisplayHomeAsUpEnabled(true);
 		this.getActionBar().setHomeButtonEnabled(true);
 		this.getActionBar().setTitle("Flipping Blocks");
+		
 
 		// initialize the Layout
 		mainLayout = new GridLayout(this);
 		mainContent = new LinearLayout(this);
 		sideMenuContent = new LinearLayout(this);
 		
-		
+
 		SwipeGesture gesture = new SwipeGesture(this) {
 
+			@Override
 			public void onSwipeRight() {
 				moveMenuInOut();
 			}
 
+			@Override
 			public void onSwipeLeft() {
 				moveMenuInOut();
 			}
 
+			@Override
 			public void onSwipeTop() {
 			}
 
+			@Override
 			public void onSwipeBottom() {
 			}
 		};
@@ -108,15 +90,16 @@ public class Launcher extends Activity implements OnClickListener {
 		sideMenuContent.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
 		sideMenuContent.setGravity(Gravity.LEFT);
 		sideMenuContent.setOrientation(LinearLayout.VERTICAL);
-		
-		//define mainContent
-//		mainContent.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
+		// sideMenuContent.getBackground().setColorFilter(Color.DKGRAY,
+		// PorterDuff.Mode.LIGHTEN);
+
+		// define mainContent
+		// mainContent.setShowDividers(LinearLayout.SHOW_DIVIDER_MIDDLE);
 		mainContent.setGravity(Gravity.CENTER_HORIZONTAL);
 		mainContent.setBackgroundColor(Color.BLACK);
 		mainContent.setOrientation(LinearLayout.VERTICAL);
 		mainContent.setVerticalGravity(Gravity.CENTER_VERTICAL);
 		mainContent.setDividerPadding(200);
-		
 
 		// adding Components to different Components
 		this.setContentView(mainLayout);
@@ -124,55 +107,68 @@ public class Launcher extends Activity implements OnClickListener {
 		mainLayout.addView(sideMenuContent);
 		mainLayout.addView(mainContent);
 
-		
-		int menu_margin=25;
-		int content_margin = 50;
-		
-		
-		sideMenuContent.addView(generateButton("Options", null,menu_margin));
-		sideMenuContent.addView(generateButton("Test2", null,menu_margin));
-		
-		
-		
-		mainContent.addView(generateButton("3 x 3", null,content_margin));
-		mainContent.addView(generateButton("5 x 5", null,content_margin));
-		mainContent.addView(generateButton("7 x 7", null,content_margin));
-		
-		
+		sideMenuContent.addView(generateButton("Options", null, menu_margin,
+				true));
+		sideMenuContent
+				.addView(generateButton("Test2", null, menu_margin, true));
 
-		
+		mainContent.addView(generateButton("Fieldsize: 3 x 3", null,
+				content_margin, false));
+		mainContent.addView(generateButton("Fieldsize: 5 x 5", null,
+				content_margin, false));
+		mainContent.addView(generateButton("Fieldsize: 7 x 7", null,
+				content_margin, false));
+
 		// //sideMenu ausblenden
-				LayoutParams params = sideMenuContent.getLayoutParams();
-				params.width = 50;
-				params.height = LayoutParams.MATCH_PARENT;
-				sideMenuContent.setLayoutParams(params);
-				//
-				// //Content
-				 params = mainContent.getLayoutParams();
-				  params.height = LayoutParams.MATCH_PARENT;
-				  params.width = LayoutParams.MATCH_PARENT;
-				 mainContent.setLayoutParams(params);
+		LayoutParams params = sideMenuContent.getLayoutParams();
+		params.width = (int) (widthHidden);
+		params.height = LayoutParams.MATCH_PARENT;
+		sideMenuContent.setLayoutParams(params);
+		//
+		// //Content
+		params = mainContent.getLayoutParams();
+		params.height = LayoutParams.MATCH_PARENT;
+		params.width = LayoutParams.MATCH_PARENT;
+		mainContent.setLayoutParams(params);
 
-				// initialize GestureListener
+		// initialize GestureListener
 
 	}
-	
-	
 
+	public Button generateButton(String name, OnClickListener listener,
+			int margin, boolean widthMatchParent) {
 
-	public Button generateButton(String name, OnClickListener listener, int margin) {
-		
 		Button button = new Button(this);
 		button.setText(name);
 		button.setOnClickListener(listener);
 		button.setTextColor(Color.CYAN);
+
+		button.setSingleLine();
+
 		
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		
+		if(widthMatchParent){
+		button.getBackground().setColorFilter(Color.BLACK,
+				PorterDuff.Mode.MULTIPLY);
+		}else{
+			button.getBackground().setColorFilter(Color.GRAY,
+					PorterDuff.Mode.MULTIPLY);
+		}
+
+		LinearLayout.LayoutParams params;
+
+		if (widthMatchParent) {
+			params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
+					LayoutParams.WRAP_CONTENT);
+
+		} else {
+
+			params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
+					LayoutParams.WRAP_CONTENT);
+
+		}
+
 		params.bottomMargin = margin;
 		button.setLayoutParams(params);
-		
-	
 
 		return button;
 	}
@@ -185,6 +181,7 @@ public class Launcher extends Activity implements OnClickListener {
 		return true;
 	}
 
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 
 		moveMenuInOut();
@@ -194,26 +191,21 @@ public class Launcher extends Activity implements OnClickListener {
 
 	public void moveMenuInOut() {
 		LayoutParams temp = sideMenuContent.getLayoutParams();
-		float layoutWidth = 200;
-		float widthHidden = 50;
-		
-		
+		System.out.println(temp.width);
 
 		if (temp.width != widthHidden) {
 			ResizeAnimation animation = new ResizeAnimation(sideMenuContent,
-					(float) (temp.width), (float) (temp.height),
-					widthHidden,
-					(float) (temp.height));
+					(temp.width), (temp.height), widthHidden,
+					(temp.height));
 			sideMenuContent.startAnimation(animation);
-				
-			
-			
+
 		} else {
+
 			ResizeAnimation animation = new ResizeAnimation(sideMenuContent,
-					(float) (temp.width), (float) (temp.height), layoutWidth,
-					(float) (temp.height));
+					(temp.width), (temp.height), layoutWidth,
+					(temp.height));
 			sideMenuContent.startAnimation(animation);
-			
+
 		}
 	}
 
