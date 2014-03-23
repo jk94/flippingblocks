@@ -1,22 +1,18 @@
 package de.jf.flippingblocks.gameGui;
 
-import de.jf.flippingblocks.R;
-import de.jf.flippingblocks.gestures.MoveMenu;
-import de.jf.flippingblocks.gestures.SwipeGesture;
-import de.jf.flippingblocks.graphics.BlockPanel;
-import de.jf.flippingblocks.graphics.CentralStyleGenerator;
-import de.jf.flippingblocks.graphics.ResizeAnimation;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
+import de.jf.flippingblocks.R;
+import de.jf.flippingblocks.gestures.MoveMenu;
+import de.jf.flippingblocks.gestures.SwipeGesture;
+import de.jf.flippingblocks.graphics.BlockPanel;
+import de.jf.flippingblocks.graphics.CentralStyleGenerator;
 
 public class GameGui extends Activity {
 
