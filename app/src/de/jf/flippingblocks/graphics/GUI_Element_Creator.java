@@ -92,8 +92,7 @@ public class GUI_Element_Creator {
 		mainContent.setBackgroundColor(Color.BLACK);
 		mainContent.setOrientation(LinearLayout.VERTICAL);
 		mainContent.setVerticalGravity(Gravity.CENTER_VERTICAL);
-		mainContent.setDividerPadding(200);
-
+		
 		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,
 				LayoutParams.MATCH_PARENT);
 
@@ -101,6 +100,10 @@ public class GUI_Element_Creator {
 
 		return mainContent;
 
+	}
+	
+	public static BlockPanel generateBlockPanel(){
+		return new BlockPanel(null);
 	}
 
 	public static GridLayout generateGameField(Context context, int cols,
