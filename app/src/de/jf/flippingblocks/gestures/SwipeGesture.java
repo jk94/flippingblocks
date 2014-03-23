@@ -9,9 +9,11 @@ import android.view.View.OnTouchListener;
 public class SwipeGesture implements OnTouchListener {
 
     private final GestureDetector gestureDetector;
+    protected Context ctx;
 
     public SwipeGesture (Context ctx){
         gestureDetector = new GestureDetector(ctx, new GestureListener());
+        this.ctx = ctx;
     }
 
     private final class GestureListener extends SimpleOnGestureListener {

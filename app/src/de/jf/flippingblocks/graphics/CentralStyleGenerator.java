@@ -2,20 +2,27 @@ package de.jf.flippingblocks.graphics;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Point;
 import android.graphics.PorterDuff;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 
-public class GUI_Element_Creator {
+public class CentralStyleGenerator {
 	// This class offers the chance to generate gui_elements, so that every
 	// gui_elemnt's look and feel is the same
 
-	public final static int sideMenuWidthHidden = 50;
-	public final static int sideMenuWidthExpanded = 400;
+	// angabe in %
+	private final static float sideMenuWidthHidden = 0.01f;
+	
+	private final static float sideMenuWidthExpanded = 0.6f;
+	
+	
 	public static final int menu_margin = 5;
 	public static final int content_margin = 50;
 
@@ -68,7 +75,7 @@ public class GUI_Element_Creator {
 		// sideMenuContent.getBackground().setColorFilter(Color.DKGRAY,
 		// PorterDuff.Mode.LIGHTEN);
 		// //sideMenu ausblenden
-		LayoutParams params = new LayoutParams(sideMenuWidthHidden,
+		LayoutParams params = new LayoutParams((int)getMenuWidthHidden(context),
 				LayoutParams.MATCH_PARENT);
 
 		sideMenu.setLayoutParams(params);
@@ -102,8 +109,16 @@ public class GUI_Element_Creator {
 
 	}
 	
-	public static BlockPanel generateBlockPanel(){
-		return new BlockPanel(null);
+	public static BlockPanel generateBlockPanel(Context context , int color, int grid_col){
+		Point size = getScreenResolution(context);
+		int block_edge = size.x / grid_col;
+		// das verhalten des BlockPanels wird in der Klasse selber verändert, da die farbe des objekts 
+		// zur laufzeit geändert werden muss
+		
+		BlockPanel panel = new BlockPanel(context, "", color, block_edge, block_edge);
+		
+		
+		return panel;
 	}
 
 	public static GridLayout generateGameField(Context context, int cols,
@@ -132,5 +147,33 @@ public class GUI_Element_Creator {
 
 		return gameField;
 
+	}
+	
+	public static float getMenuWidthHidden(Context context){
+		Point size = getScreenResolution(context);
+		float width = size.x * sideMenuWidthHidden;
+		
+		return width;
+	}
+	
+	public static float getMenuWidthExpanded(Context context){
+		
+		
+		Point size = getScreenResolution(context);
+		
+		float width = size.x * sideMenuWidthExpanded;
+		
+		return width;
+		
+	}
+	
+	public static Point getScreenResolution(Context context){
+		WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+		Display display = wm.getDefaultDisplay();
+		
+		Point size = new Point();
+		display.getSize(size);
+		
+		return size;
 	}
 }

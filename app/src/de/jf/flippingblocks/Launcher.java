@@ -2,6 +2,7 @@ package de.jf.flippingblocks;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
@@ -15,7 +16,7 @@ import android.widget.LinearLayout;
 import de.jf.flippingblocks.gameGui.GameGui;
 import de.jf.flippingblocks.gestures.MoveMenu;
 import de.jf.flippingblocks.gestures.SwipeGesture;
-import de.jf.flippingblocks.graphics.GUI_Element_Creator;
+import de.jf.flippingblocks.graphics.CentralStyleGenerator;
 import de.jf.flippingblocks.graphics.ResizeAnimation;
 
 
@@ -50,21 +51,21 @@ public class Launcher extends Activity implements OnClickListener {
 		
 
 		// initialize the Layout
-		mainLayout = GUI_Element_Creator.generateMainLayout(this);
-		mainContent =GUI_Element_Creator.generateLauncherField(this);
-		sideMenuContent = GUI_Element_Creator.generateSideMenu(this);
+		mainLayout = CentralStyleGenerator.generateMainLayout(this);
+		mainContent =CentralStyleGenerator.generateLauncherField(this);
+		sideMenuContent = CentralStyleGenerator.generateSideMenu(this);
 		
-
+		Context ctx = this;
 		SwipeGesture gesture = new SwipeGesture(this) {
 
 			@Override
 			public void onSwipeRight() {
-				MoveMenu.enlargeMenu(sideMenuContent);
+				MoveMenu.enlargeMenu(sideMenuContent, ctx);
 			}
 
 			@Override
 			public void onSwipeLeft() {
-				MoveMenu.minimizeMenu(sideMenuContent);
+				MoveMenu.minimizeMenu(sideMenuContent,ctx);
 			}
 
 			@Override
@@ -90,18 +91,18 @@ public class Launcher extends Activity implements OnClickListener {
 		mainLayout.addView(mainContent);
 
 		
-		sideMenuContent.addView(GUI_Element_Creator.generateButton(this, "Option", null, true));
-		sideMenuContent.addView(GUI_Element_Creator.generateButton(this, "Save", null, true));
-		sideMenuContent.addView(GUI_Element_Creator.generateButton(this, "Share", null, true));
-		sideMenuContent.addView(GUI_Element_Creator.generateButton(this, "Highscores", null, true));
+		sideMenuContent.addView(CentralStyleGenerator.generateButton(this, "Option", null, true));
+		sideMenuContent.addView(CentralStyleGenerator.generateButton(this, "Save", null, true));
+		sideMenuContent.addView(CentralStyleGenerator.generateButton(this, "Share", null, true));
+		sideMenuContent.addView(CentralStyleGenerator.generateButton(this, "Highscores", null, true));
 		
 		
-		mainContent.addView(GUI_Element_Creator.generateButton(this, "Fieldsize  3 x 3", generateModusListener("3x3"), false));
-		mainContent.addView(GUI_Element_Creator.generateButton(this, "Fieldsize  5 x 5", generateModusListener("5x5"), false));
-		mainContent.addView(GUI_Element_Creator.generateButton(this, "Fieldsize  7 x 7", generateModusListener("7x7"), false));
-		mainContent.addView(GUI_Element_Creator.generateButton(this, "Fieldsize  9 x 9", generateModusListener("9x9"), false));
-		mainContent.addView(GUI_Element_Creator.generateButton(this, "Fieldsize 11 x 11", generateModusListener("11x11"), false));
-		
+		mainContent.addView(CentralStyleGenerator.generateButton(this, "Fieldsize  3 x 3", generateModusListener(3,3), false));
+		mainContent.addView(CentralStyleGenerator.generateButton(this, "Fieldsize  5 x 5", generateModusListener(5,5), false));
+		mainContent.addView(CentralStyleGenerator.generateButton(this, "Fieldsize  7 x 7", generateModusListener(7,7), false));
+		mainContent.addView(CentralStyleGenerator.generateButton(this, "Fieldsize  9 x 9", generateModusListener(9,9), false));
+		mainContent.addView(CentralStyleGenerator.generateButton(this, "Fieldsize 11 x 11", generateModusListener(11,11), false));
+		mainContent.addView(CentralStyleGenerator.generateButton(this, "Fieldsize 10 x 17", generateModusListener(10,17), false));
 
 	}
 
@@ -129,16 +130,16 @@ public class Launcher extends Activity implements OnClickListener {
 		LayoutParams temp = sideMenuContent.getLayoutParams();
 		
 
-		if (temp.width != GUI_Element_Creator.sideMenuWidthHidden) {
+		if (temp.width != CentralStyleGenerator.getMenuWidthHidden(this)) {
 			ResizeAnimation animation = new ResizeAnimation(sideMenuContent,
-					(temp.width), (temp.height), GUI_Element_Creator.sideMenuWidthHidden,
+					(temp.width), (temp.height), CentralStyleGenerator.getMenuWidthHidden(this),
 					(temp.height));
 			sideMenuContent.startAnimation(animation);
 
 		} else {
 
 			ResizeAnimation animation = new ResizeAnimation(sideMenuContent,
-					(temp.width), (temp.height), GUI_Element_Creator.sideMenuWidthExpanded,
+					(temp.width), (temp.height), CentralStyleGenerator.getMenuWidthExpanded(this),
 					(temp.height));
 			sideMenuContent.startAnimation(animation);
 
@@ -151,22 +152,25 @@ public class Launcher extends Activity implements OnClickListener {
 
 	}
 	
-	public OnClickListener generateModusListener(String modus){
-		final String mod = modus;
+	public OnClickListener generateModusListener(int cols, int rows){
+		final int col = cols;
+		final int row = rows;
 		return new OnClickListener() {
 			
 			
 			
 			@Override
 			public void onClick(View v) {
-				startNewGame(mod);
+				startNewGame(col , row);
 				
 			}
 		};
 	}
 	
-	public void startNewGame(String modus){
+	public void startNewGame(int cols, int rows){
 		Intent intent = new Intent(this,GameGui.class);
+		intent.putExtra("cols", cols);
+		intent.putExtra("rows", rows);
 		startActivity(intent);
 	}
 
