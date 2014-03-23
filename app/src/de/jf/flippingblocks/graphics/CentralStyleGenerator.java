@@ -143,7 +143,7 @@ public class CentralStyleGenerator {
 		gameField.setColumnCount(cols);
 		
 		gameField.setLayoutParams(gparams);
-		gameField.setBackgroundColor(Color.WHITE);
+		gameField.setBackgroundColor(Color.BLACK);
 
 		return gameField;
 

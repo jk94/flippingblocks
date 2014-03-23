@@ -102,7 +102,7 @@ public class Launcher extends Activity implements OnClickListener {
 		mainContent.addView(CentralStyleGenerator.generateButton(this, "Fieldsize  7 x 7", generateModusListener(7,7), false));
 		mainContent.addView(CentralStyleGenerator.generateButton(this, "Fieldsize  9 x 9", generateModusListener(9,9), false));
 		mainContent.addView(CentralStyleGenerator.generateButton(this, "Fieldsize 11 x 11", generateModusListener(11,11), false));
-		mainContent.addView(CentralStyleGenerator.generateButton(this, "Fieldsize 10 x 17", generateModusListener(10,17), false));
+		mainContent.addView(CentralStyleGenerator.generateButton(this, "Fieldsize 20 x 20", generateModusListener(20,25), false));
 
 	}
 
