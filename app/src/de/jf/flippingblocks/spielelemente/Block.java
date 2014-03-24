@@ -6,7 +6,7 @@ import de.jf.flippingblocks.graphics.BlockPanel;
 public class Block {
 
 	private EnumColor color;
-	private final BlockPanel btn;
+	private BlockPanel btn;
 
 	public Block(EnumColor color, BlockPanel b) {
 		this.color = color;
@@ -30,6 +30,9 @@ public class Block {
 		return btn;
 	}
 
+	public void setBtn(BlockPanel btn){
+		this.btn = btn;
+	}
 	
 	
 }
