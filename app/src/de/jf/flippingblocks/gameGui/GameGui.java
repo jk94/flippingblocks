@@ -30,6 +30,8 @@ public class GameGui extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_gamegui);
 	
+		
+		
 		initialisiere();
 	}
 
@@ -82,7 +84,7 @@ public class GameGui extends Activity {
 		
 		for(int i = 0; i < grid_col * grid_row ;i++){
 			String name = "" + i;
-			BlockPanel temp = CentralStyleGenerator.generateBlockPanel(this, Color.CYAN, grid_col);
+			BlockPanel temp = CentralStyleGenerator.generateBlockPanel(this, Color.WHITE, grid_col);
 			temp.setOnTouchListener(gesture);
 			field.addView(temp);
 			

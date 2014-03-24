@@ -1,6 +1,10 @@
 package de.jf.flippingblocks;
 
-public class Control {
+public class Control extends Thread {
+	
+	public void run(){
+		
+	}
 	
 	
 

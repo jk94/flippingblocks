@@ -44,6 +44,7 @@ public class BlockPanel extends Button {
 		this.active_margin_top = s_margin_top;
 		this.active_margin_bottom = s_margin_bottom;
 		
+		
 		this.getBackground().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
 		
 		this.setLayoutParams(params);

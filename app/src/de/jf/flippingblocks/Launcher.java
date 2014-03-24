@@ -5,12 +5,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import de.jf.flippingblocks.gameGui.GameGui;
@@ -27,6 +29,8 @@ public class Launcher extends Activity implements OnClickListener {
 	LinearLayout mainContent;
 	LinearLayout sideMenuContent;
 	SwipeGesture gestureListener;
+	EditText edit_col ;
+	EditText edit_row ;
 	
 	
 	// muss dringend dynamisch gemacht werden
@@ -96,14 +100,18 @@ public class Launcher extends Activity implements OnClickListener {
 		sideMenuContent.addView(CentralStyleGenerator.generateButton(this, "Share", null, true));
 		sideMenuContent.addView(CentralStyleGenerator.generateButton(this, "Highscores", null, true));
 		
+		edit_col = new EditText(this);
+		edit_row = new EditText(this);
 		
-		mainContent.addView(CentralStyleGenerator.generateButton(this, "Fieldsize  3 x 3", generateModusListener(3,3), false));
-		mainContent.addView(CentralStyleGenerator.generateButton(this, "Fieldsize  5 x 5", generateModusListener(5,5), false));
-		mainContent.addView(CentralStyleGenerator.generateButton(this, "Fieldsize  7 x 7", generateModusListener(7,7), false));
-		mainContent.addView(CentralStyleGenerator.generateButton(this, "Fieldsize  9 x 9", generateModusListener(9,9), false));
-		mainContent.addView(CentralStyleGenerator.generateButton(this, "Fieldsize 11 x 11", generateModusListener(11,11), false));
-		mainContent.addView(CentralStyleGenerator.generateButton(this, "Fieldsize 20 x 20", generateModusListener(20,25), false));
-
+		edit_col.setTextColor(Color.CYAN);
+		edit_row.setTextColor(Color.CYAN);
+		
+		mainContent.addView(edit_col);
+		mainContent.addView(edit_row);
+		
+		mainContent.addView(CentralStyleGenerator.generateButton(this, "Start", generateModusListener(0, 0),false));
+		
+		
 	}
 
 
@@ -155,13 +163,18 @@ public class Launcher extends Activity implements OnClickListener {
 	public OnClickListener generateModusListener(int cols, int rows){
 		final int col = cols;
 		final int row = rows;
+		
+		// muss wieder ge
 		return new OnClickListener() {
 			
 			
 			
 			@Override
 			public void onClick(View v) {
-				startNewGame(col , row);
+				// TODO muss wieder geändert werden
+				int col_n= Integer.valueOf(edit_col.getText().toString());
+				int row_n= Integer.valueOf(edit_row.getText().toString()); 
+				startNewGame(col_n , row_n);
 				
 			}
 		};
