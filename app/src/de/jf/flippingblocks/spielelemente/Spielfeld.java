@@ -1,5 +1,6 @@
 package de.jf.flippingblocks.spielelemente;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import de.jf.flippingblocks.Enum.EnumColor;
@@ -25,7 +26,7 @@ public class Spielfeld {
 		}
 	}
 
-	//Gibt den Block zurück, zu dem der (geklickte) Button (Referenz) gehört.
+	//Gibt den Block zurï¿½ck, zu dem der (geklickte) Button (Referenz) gehï¿½rt.
 	public Block getBlockByBtnRef(BlockPanel b) {
 		Block erg = null;
 		for (ArrayList<Block> y : blocklist) {
@@ -42,8 +43,8 @@ public class Spielfeld {
 		return erg;
 	}
 
-	//Überprüft, ob Block die Richtige Farbe hat (zum abbauen) und fügt ihn in Liste hinzu
-	//Überprüft die anliegenden Blöcke auf passende Farbe -> Rekursiv
+	//ï¿½berprï¿½ft, ob Block die Richtige Farbe hat (zum abbauen) und fï¿½gt ihn in Liste hinzu
+	//ï¿½berprï¿½ft die anliegenden Blï¿½cke auf passende Farbe -> Rekursiv
 	public ArrayList<Block> CheckMate(ArrayList<Block> ergebnisliste,
 			Block pruefblock, EnumColor color) {
 
@@ -66,7 +67,7 @@ public class Spielfeld {
 		return ergebnisliste;
 	}
 
-	// Prüft ob Block in einer Liste schon vorhanden -> Verwendung, ob Block zum zerstören schon in der Liste.
+	// Prï¿½ft ob Block in einer Liste schon vorhanden -> Verwendung, ob Block zum zerstï¿½ren schon in der Liste.
 	public boolean schonVorhanden(ArrayList<Block> ergebnisliste,
 			Block pruefblock) {
 		try {
@@ -86,7 +87,7 @@ public class Spielfeld {
 
 	// Gibt einen Block in x/y-Richtung vom angegebenen Block an. (Akzeptiert
 	// auch Minuswerte)
-	// Ist die angegebene Position außerhalb des Bereichs gibt es >null< zurück.
+	// Ist die angegebene Position auï¿½erhalb des Bereichs gibt es >null< zurï¿½ck.
 	public Block getBlockNext(Block ausgangsBlock, int xRichtung, int yRichtung) {
 		Block erg = null;
 		// Find Block
@@ -118,8 +119,8 @@ public class Spielfeld {
 		return erg;
 	}
 
-	// Zerstört die (gefundenen) Blöcke/Bei Spielende könnten alle Blöcke
-	// zerstört werden.
+	// Zerstï¿½rt die (gefundenen) Blï¿½cke/Bei Spielende kï¿½nnten alle Blï¿½cke
+	// zerstï¿½rt werden.
 	// TODO (-> Animation?)
 	public void destroyBlocks(ArrayList<Block> list) {
 		for (Block b : list) {
@@ -138,8 +139,8 @@ public class Spielfeld {
 		}
 	}
 
-	// Füllt das Spielfeld wieder mit Blöcken auf
-	//TODO Referenzen für Buttons auf GUI
+	// Fï¿½llt das Spielfeld wieder mit Blï¿½cken auf
+	//TODO Referenzen fï¿½r Buttons auf GUI
 	public void fillWithBlocks() {
 		for (ArrayList<Block> list : blocklist) {
 			while (list.size() < borderY) {

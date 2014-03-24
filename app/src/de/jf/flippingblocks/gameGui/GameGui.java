@@ -1,5 +1,7 @@
 package de.jf.flippingblocks.gameGui;
 
+import java.io.Serializable;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -8,13 +10,14 @@ import android.os.Bundle;
 import android.view.WindowManager;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import de.jf.flippingblocks.Control;
 import de.jf.flippingblocks.R;
 import de.jf.flippingblocks.gestures.MoveMenu;
 import de.jf.flippingblocks.gestures.SwipeGesture;
 import de.jf.flippingblocks.graphics.BlockPanel;
 import de.jf.flippingblocks.graphics.CentralStyleGenerator;
 
-public class GameGui extends Activity {
+public class GameGui extends Activity implements Serializable {
 
 	GridLayout mainLayout;
 	LinearLayout swipeInMenu;
@@ -36,6 +39,14 @@ public class GameGui extends Activity {
 	}
 
 	public void initialisiere() {
+		
+		
+		Control control = (Control) this.getIntent().getSerializableExtra("control");
+		
+		control.setGameGui(this);
+		control.run();
+		
+		
 		
 		grid_col = this.getIntent().getExtras().getInt("cols");
 		grid_row = this.getIntent().getExtras().getInt("rows");
