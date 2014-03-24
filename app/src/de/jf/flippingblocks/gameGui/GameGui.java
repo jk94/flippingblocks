@@ -12,6 +12,7 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import de.jf.flippingblocks.Control;
 import de.jf.flippingblocks.R;
+import de.jf.flippingblocks.Enum.EnumColor;
 import de.jf.flippingblocks.gestures.MoveMenu;
 import de.jf.flippingblocks.gestures.SwipeGesture;
 import de.jf.flippingblocks.graphics.BlockPanel;
@@ -95,7 +96,7 @@ public class GameGui extends Activity implements Serializable {
 		
 		for(int i = 0; i < grid_col * grid_row ;i++){
 			String name = "" + i;
-			BlockPanel temp = CentralStyleGenerator.generateBlockPanel(this, Color.WHITE, grid_col);
+			BlockPanel temp = CentralStyleGenerator.generateBlockPanel(this, EnumColor.WHITE, grid_col);
 			temp.setOnTouchListener(gesture);
 			field.addView(temp);
 			
@@ -103,7 +104,7 @@ public class GameGui extends Activity implements Serializable {
 
 	}
 	
-	public BlockPanel addBlockPanel(int color){
+	public BlockPanel addBlockPanel(EnumColor color){
 		
 		BlockPanel panel = CentralStyleGenerator.generateBlockPanel(this, color, grid_col);
 		field.addView(panel);
