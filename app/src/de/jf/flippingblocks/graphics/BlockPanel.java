@@ -1,9 +1,11 @@
 package de.jf.flippingblocks.graphics;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import de.jf.flippingblocks.Enum.EnumColor;
 
 public class BlockPanel extends Button {
 
@@ -18,14 +20,14 @@ public class BlockPanel extends Button {
 	private int active_margin_top;
 	private int active_margin_bottom ;
 	
-	private int color;
+	private EnumColor color;
 	
 	public BlockPanel(Context context) {
 		super(context);
 		// TODO Auto-generated constructor stub
 	}
-
-	public BlockPanel(Context context, String name, int color, int width, int height){
+	
+	public BlockPanel(Context context, String name, EnumColor color, int width, int height){
 		super(context);
 		this.setText(name);
 		// es können auch attribute wie layoutparams.match_parent oder wrap_content sein
@@ -45,17 +47,17 @@ public class BlockPanel extends Button {
 		this.active_margin_bottom = s_margin_bottom;
 		
 		
-		this.getBackground().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
+		this.getBackground().setColorFilter(Color.parseColor(color.name()), PorterDuff.Mode.MULTIPLY);
 		
 		this.setLayoutParams(params);
 	}
 	
-	public void changeColor(int color){
+	public void changeColor(EnumColor color){
 		this.color=color;
-		this.getBackground().setColorFilter(color, PorterDuff.Mode.MULTIPLY);
+		this.getBackground().setColorFilter(Color.parseColor(color.name()), PorterDuff.Mode.MULTIPLY);
 	}
 
-	public int getColor() {
+	public EnumColor getColor() {
 		return color;
 	}
 
@@ -99,7 +101,7 @@ public class BlockPanel extends Button {
 	}
 	
 	public static BlockPanel generateNewBlockPanel(Context context, String name, int color, int width, int height){
-		return new BlockPanel(context, name, color, width, height);
+		return new BlockPanel(context, name, EnumColor.WHITE, width, height);
 	}
 	
 	

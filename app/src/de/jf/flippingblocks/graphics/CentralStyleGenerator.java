@@ -1,5 +1,6 @@
 package de.jf.flippingblocks.graphics;
 
+import de.jf.flippingblocks.Enum.EnumColor;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -109,13 +110,13 @@ public class CentralStyleGenerator {
 
 	}
 	
-	public static BlockPanel generateBlockPanel(Context context , int color, int grid_col){
+	public static BlockPanel generateBlockPanel(Context context , EnumColor color, int grid_col){
 		Point size = getScreenResolution(context);
 		int block_edge = size.x / grid_col;
 		// das verhalten des BlockPanels wird in der Klasse selber verändert, da die farbe des objekts 
 		// zur laufzeit geändert werden muss
 		
-		BlockPanel panel = new BlockPanel(context, "", color, block_edge, block_edge);
+		BlockPanel panel = new BlockPanel(context, "", color , block_edge, block_edge);
 		
 		
 		return panel;
