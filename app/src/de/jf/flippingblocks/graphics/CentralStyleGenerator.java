@@ -1,6 +1,5 @@
 package de.jf.flippingblocks.graphics;
 
-import de.jf.flippingblocks.Enum.EnumColor;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -13,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import de.jf.flippingblocks.Enum.EnumColor;
 
 public class CentralStyleGenerator {
 	// This class offers the chance to generate gui_elements, so that every

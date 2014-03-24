@@ -1,6 +1,5 @@
 package de.jf.flippingblocks.spielelemente;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import de.jf.flippingblocks.Enum.EnumColor;
