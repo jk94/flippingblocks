@@ -23,7 +23,12 @@ public class SwipeGesture implements OnTouchListener {
 
         @Override
         public boolean onDown(MotionEvent e) {
-            return true;
+        	return false;
+        }
+        
+        
+        public boolean onTouchEvent(View arg0, MotionEvent arg1){
+        	return false;
         }
 
         @Override

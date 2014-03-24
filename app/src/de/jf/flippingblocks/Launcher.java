@@ -181,7 +181,10 @@ public class Launcher extends Activity implements OnClickListener {
 	}
 	
 	public void startNewGame(int cols, int rows){
-		Control control = new Control (this, cols , rows);
+		Intent intent = new Intent(this, GameGui.class);
+		intent.putExtra("col", cols);
+		intent.putExtra("row", rows);
+		startActivity(intent);
 		
 		
 	}
