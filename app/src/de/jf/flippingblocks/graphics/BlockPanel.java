@@ -101,7 +101,7 @@ public class BlockPanel extends Button {
 	}
 	
 	public static BlockPanel generateNewBlockPanel(Context context, String name, int color, int width, int height){
-		return new BlockPanel(context, name, color, width, height);
+		return new BlockPanel(context, name, EnumColor.WHITE, width, height);
 	}
 	
 	
