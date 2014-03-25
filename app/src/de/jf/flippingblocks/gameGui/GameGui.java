@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
@@ -103,13 +104,13 @@ public class GameGui extends Activity  {
 		center.addView(field);
 		
 		AdView adView = new AdView(this);
-		adView.setAdSize(AdSize.BANNER);
+		adView.setAdSize(AdSize.SMART_BANNER);
 		adView.setAdUnitId("ca-app-pub-9906233160008931/6838748603");
-		 
+		
 		 center.addView(adView);
 		 AdRequest adRequest = new AdRequest.Builder().addTestDevice("TEST_DEVICE_ID").build();
 		 adView.loadAd(adRequest);
-		
+	
 		
 		for(int i = 0; i < grid_col * grid_row ;i++){
 			String name = "" + i;
