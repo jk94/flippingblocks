@@ -30,4 +30,10 @@
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<variableList>
+		<variable>
+			<name>MAIN_FOLDER</name>
+			<value>file:/C:/Users/Jan/Documents/GIT/flippingblocks</value>
+		</variable>
+	</variableList>
 </projectDescription>
