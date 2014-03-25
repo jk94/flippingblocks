@@ -108,7 +108,7 @@ public class GameGui extends Activity  {
 		adView.setAdUnitId("ca-app-pub-9906233160008931/6838748603");
 		
 		 center.addView(adView);
-		 AdRequest adRequest = new AdRequest.Builder().addTestDevice("TEST_DEVICE_ID").build();
+		 AdRequest adRequest = new AdRequest.Builder().build();
 		 adView.loadAd(adRequest);
 	
 		
