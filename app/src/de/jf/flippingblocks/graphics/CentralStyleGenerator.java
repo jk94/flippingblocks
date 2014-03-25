@@ -1,6 +1,5 @@
 package de.jf.flippingblocks.graphics;
 
-import de.jf.flippingblocks.Enum.EnumColor;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -14,6 +13,13 @@ import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+
+
+import de.jf.flippingblocks.Enum.EnumColor;
+
 public class CentralStyleGenerator {
 	// This class offers the chance to generate gui_elements, so that every
 	// gui_elemnt's look and feel is the same
@@ -26,6 +32,7 @@ public class CentralStyleGenerator {
 	
 	public static final int menu_margin = 5;
 	public static final int content_margin = 50;
+	public final static String AD_UNIT_ID_INGAME = "ca-app-pub-9906233160008931/6838748603";
 
 	public static Button generateButton(Context context, String name,
 			OnClickListener listener, boolean isMenu) {
@@ -108,6 +115,21 @@ public class CentralStyleGenerator {
 
 		return mainContent;
 
+	}
+	
+	public static AdView generateingameAdd(Context context){
+		
+		AdView adView = new AdView(context);
+//	    adView.setAdSize(AdSize.BANNER);
+//	    adView.setAdUnitId(AD_UNIT_ID_INGAME);
+//	    
+//	    AdRequest adRequest = new AdRequest.Builder().addTestDevice("TEST_DEVICE_ID").build();
+//	    adView.loadAd(adRequest);
+//		LinearLayout.LayoutParams params= new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+//		adView.setLayoutParams(params);
+	    
+		return adView;
+		
 	}
 	
 	public static BlockPanel generateBlockPanel(Context context , EnumColor color, int grid_col){

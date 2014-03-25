@@ -2,6 +2,10 @@ package de.jf.flippingblocks.gameGui;
 
 import java.io.Serializable;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,13 +19,14 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import de.jf.flippingblocks.Control;
 import de.jf.flippingblocks.R;
+
 import de.jf.flippingblocks.Enum.EnumColor;
 import de.jf.flippingblocks.gestures.MoveMenu;
 import de.jf.flippingblocks.gestures.SwipeGesture;
 import de.jf.flippingblocks.graphics.BlockPanel;
 import de.jf.flippingblocks.graphics.CentralStyleGenerator;
 
-public class GameGui extends Activity implements Serializable {
+public class GameGui extends Activity  {
 
 	GridLayout mainLayout;
 	LinearLayout swipeInMenu;
@@ -31,6 +36,7 @@ public class GameGui extends Activity implements Serializable {
 	private int grid_row;
 
 	Control control;
+	AdView adView;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -99,6 +105,14 @@ public class GameGui extends Activity implements Serializable {
 		mainLayout.addView(center);
 		center.addView(field);
 		
+		AdView adView = new AdView(this);
+		adView.setAdSize(AdSize.BANNER);
+		adView.setAdUnitId("ca-app-pub-9906233160008931/6838748603");
+		 
+		 center.addView(adView);
+		 AdRequest adRequest = new AdRequest.Builder().addTestDevice("TEST_DEVICE_ID").build();
+		 adView.loadAd(adRequest);
+		
 		
 		for(int i = 0; i < grid_col * grid_row ;i++){
 			String name = "" + i;
@@ -138,7 +152,31 @@ public class GameGui extends Activity implements Serializable {
 	}
 
 	
-	
+	@Override
+	  public void onResume() {
+	    super.onResume();
+	    if (adView != null) {
+	      adView.resume();
+	    }
+	  }
+
+	  @Override
+	  public void onPause() {
+	    if (adView != null) {
+	      adView.pause();
+	    }
+	    super.onPause();
+	  }
+
+	  /** Called before the activity is destroyed. */
+	  @Override
+	  public void onDestroy() {
+	    // Destroy the AdView.
+	    if (adView != null) {
+	      adView.destroy();
+	    }
+	    super.onDestroy();
+	  }
 
 
 
