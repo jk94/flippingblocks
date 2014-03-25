@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import de.jf.flippingblocks.Enum.EnumColor;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
