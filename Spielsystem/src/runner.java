@@ -110,9 +110,10 @@ public class runner extends javax.swing.JFrame {
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
         System.out.println(evt.getX() + "/" + evt.getY());
-        int height = jPanel1.getHeight() / feld.getBlocks().get(0).getVisible_length() + 1;
-        int x = jPanel1.getWidth() / height;
-        int y = (int) feld.getBlocks().get(x).getVisible_length() / height;
+        int height = jPanel1.getHeight() / feld.getBlocks().get(feld.getBlocks().size()-1).getVisible_length() + 1;
+        int x = evt.getX() / height;
+        System.out.println(x);
+        int y = feld.getBlocks().get(x).getVisible_length() -1 - evt.getY() / height;
         System.out.println(x + "/" + y);
 
         ArrayList<Block> e = new ArrayList<>();
