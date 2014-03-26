@@ -4,25 +4,21 @@ import java.util.ArrayList;
 
 import de.jf.flippingblocks.Enum.EnumColor;
 import de.jf.flippingblocks.graphics.BlockPanel;
-import java.awt.Color;
 
-public class Spielfeld {
+public class Spielfeld1 {
 
     private ArrayList<Spalte> collist;
     private int borderX, borderY;
-    private Color[] c = {Color.BLACK, Color.BLUE, Color.green, Color.RED};
 
-    public Spielfeld(int sizex, int sizey) {
+    public Spielfeld1(int sizex, int sizey) {
         borderX = sizex;
         borderY = sizey;
         collist = new ArrayList<Spalte>(borderX);
         for (int i = 0; i < borderX; i++) {
             collist.add(new Spalte(borderY));
             for (int t = 0; t < borderY; t++) {
-                int color = (int) ((Math.random() * c.length - 1));
-                //Block b = new Block(EnumColor.values()[color], null);
-                Block b = new Block(c[color], null);
-                b.setColor(EnumColor.values()[color]);
+                int color = (int) (1 + (Math.random() * 4));
+                Block b = new Block(EnumColor.values()[color], null);
                 collist.get(i).addBlock(b);
             }
         }
@@ -45,7 +41,7 @@ public class Spielfeld {
         return erg;
     }
 
-    //�berpr�ft, ob Block die Richtige Farbe hat (zum abbauen) und f�gt ihn in Liste hinzu
+	//�berpr�ft, ob Block die Richtige Farbe hat (zum abbauen) und f�gt ihn in Liste hinzu
     //�berpr�ft die anliegenden Bl�cke auf passende Farbe -> Rekursiv
     public ArrayList<Block> CheckMate(ArrayList<Block> ergebnisliste,
             Block pruefblock, EnumColor color) {
@@ -87,7 +83,7 @@ public class Spielfeld {
         return schonvorhanden;
     }
 
-    // Gibt einen Block in x/y-Richtung vom angegebenen Block an. (Akzeptiert
+	// Gibt einen Block in x/y-Richtung vom angegebenen Block an. (Akzeptiert
     // auch Minuswerte)
     // Ist die angegebene Position au�erhalb des Bereichs gibt es >null< zur�ck.
     public Block getBlockNext(Block ausgangsBlock, int xRichtung, int yRichtung) {
@@ -95,38 +91,34 @@ public class Spielfeld {
         // Find Block
         int x = 0, y = 0;
         boolean found = false;
-        try {
-            for (int i = 0; i < collist.size(); i++) {
-                Spalte sp = collist.get(i);
-                for (int n = 0; n < sp.getLength() - 1; n++) {
-                    if (sp.getSpalte().get(n).equals(ausgangsBlock)) {
-                        x = i;
-                        y = n;
-                        found = true;
-                        break;
-                    }
-                }
-                if (found) {
+        for (int i = 0; i < collist.size(); i++) {
+            Spalte sp = collist.get(i);
+            for (int n = 0; n < sp.getLength(); n++) {
+                if (sp.getSpalte().get(n).equals(ausgangsBlock)) {
+                    x = i;
+                    y = n;
+                    found = true;
                     break;
                 }
             }
-            x = x + xRichtung;
-            y = y + yRichtung;
-            if (x < 0) {
-                x = 0;
+            if (found) {
+                break;
             }
-            if (x < collist.size() && x >= 0 && y >= 0
-                    && y < collist.get(0).getLength()) {
-                erg = collist.get(x).getSpalte().get(y);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        }
+        x = x + xRichtung;
+        y = y + yRichtung;
+        if (x < 0) {
+            x = 0;
+        }
+        if (x < collist.size() && x >= 0 && y >= 0
+                && y < collist.get(0).getLength()) {
+            erg = collist.get(x).getSpalte().get(y);
         }
 
         return erg;
     }
 
-    // Zerst�rt die (gefundenen) Bl�cke/Bei Spielende k�nnten alle Bl�cke
+	// Zerst�rt die (gefundenen) Bl�cke/Bei Spielende k�nnten alle Bl�cke
     // zerst�rt werden.
     // TODO (-> Animation?)
     public void destroyBlocks(ArrayList<Block> list) {
@@ -145,8 +137,8 @@ public class Spielfeld {
             }
         }
     }
+	// F�llt das Spielfeld wieder mit Bl�cken auf
+    //TODO Referenzen f�r Buttons auf GUI
+    
 
-    public ArrayList<Spalte> getBlocks() {
-        return collist;
-    }
 }

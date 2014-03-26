@@ -5,6 +5,8 @@
  */
 package de.jf.flippingblocks.spielelemente;
 
+import de.jf.flippingblocks.Enum.EnumColor;
+import java.awt.Color;
 import java.util.ArrayList;
 
 /**
@@ -14,11 +16,21 @@ import java.util.ArrayList;
 public class Spalte {
 
     private final int length;
+    private final int visible_length;
     private final ArrayList<Block> list;
 
     public Spalte(int leng) {
+        this.visible_length = leng;
         this.length = leng + 1;
         this.list = new ArrayList<>();
+    }
+
+    public int getVisible_length() {
+        return visible_length;
+    }
+
+    public int getLength() {
+        return length;
     }
 
     public ArrayList<Block> getSpalte() {
@@ -58,6 +70,13 @@ public class Spalte {
     }
 
     public boolean removeBlock(Block b) {
+        if (list.contains(b)) {
+            if (schiebeRefBisBlock(b)) {
+                list.remove(b);
+                this.fillWithBlocks();
+                return true;
+            }
+        }
         return false;
     }
 
@@ -67,7 +86,20 @@ public class Spalte {
             for (int i = list.size() - 1; i > index; i--) {
                 list.get(i).setBtn(list.get(i - 1).getBtn());
             }
+            return true;
         }
         return false;
+    }
+private Color[] c = {Color.BLACK, Color.BLUE, Color.green, Color.RED};
+    // F�llt das Spielfeld wieder mit Bl�cken auf
+    //TODO Referenzen f�r Buttons auf GUI
+    public void fillWithBlocks() {
+        while (list.size() < length) {
+            int color = (int) ((Math.random() * c.length-1));
+            Block b = new Block(c[color], null);
+            b.setColor(EnumColor.values()[color]);
+            list.add(b);
+        }
+
     }
 }
