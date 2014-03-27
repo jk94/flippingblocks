@@ -103,14 +103,7 @@ public class GameGui extends Activity {
 		AdRequest adRequest = new AdRequest.Builder().build();
 		adView.loadAd(adRequest);
 
-		for (int i = 0; i < grid_col * grid_row; i++) {
-			String name = "" + i;
-			BlockPanel temp = addBlockPanel(EnumColor.CYAN);
-			temp.setText(name);
-			temp.setOnTouchListener(gesture);
-			field.addView(temp);
-
-		}
+		
 
 	}
 
@@ -119,7 +112,7 @@ public class GameGui extends Activity {
 		BlockPanel panel = CentralStyleGenerator.generateBlockPanel(this,
 				color, grid_col);
 		panel.setOnClickListener(generateOnClickListener(panel));
-		// field.addView(panel);
+		 field.addView(panel);
 		return panel;
 	}
 
