@@ -6,7 +6,6 @@
 package de.jf.flippingblocks.spielelemente;
 
 import de.jf.flippingblocks.Enum.EnumColor;
-import java.awt.Color;
 import java.util.ArrayList;
 
 /**
@@ -90,12 +89,13 @@ public class Spalte {
         }
         return false;
     }
+
     // F�llt das Spielfeld wieder mit Bl�cken auf
     //TODO Referenzen f�r Buttons auf GUI
     public void fillWithBlocks() {
         while (list.size() < length) {
-            int color = (int) ((Math.random() * c.length-1));
-            Block b = new Block(c[color], null);
+            int color = (int) ((Math.random() *EnumColor.values().length -1 ));
+            Block b = new Block(EnumColor.values()[color], null);
             b.setColor(EnumColor.values()[color]);
             list.add(b);
         }

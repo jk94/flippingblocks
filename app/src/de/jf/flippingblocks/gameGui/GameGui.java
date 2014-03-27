@@ -24,7 +24,7 @@ import de.jf.flippingblocks.gestures.SwipeGesture;
 import de.jf.flippingblocks.graphics.BlockPanel;
 import de.jf.flippingblocks.graphics.CentralStyleGenerator;
 
-public class GameGui extends Activity  {
+public class GameGui extends Activity {
 
 	GridLayout mainLayout;
 	LinearLayout swipeInMenu;
@@ -42,25 +42,16 @@ public class GameGui extends Activity  {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_gamegui);
-	
-		
-		
+
 		initialisiere();
 	}
 
 	public void initialisiere() {
-		
-		
-		
-		
-		
-		
-		
+
 		grid_col = this.getIntent().getExtras().getInt("col");
 		grid_row = this.getIntent().getExtras().getInt("row");
-		control = new Control(this,grid_col,grid_row);
-		
-		
+		control = new Control(this, grid_col, grid_row);
+
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		// defining ActionBar
@@ -70,18 +61,19 @@ public class GameGui extends Activity  {
 		swipeInMenu = CentralStyleGenerator.generateSideMenu(this);
 		center = CentralStyleGenerator.generateLauncherField(this);
 		// muss an dem modus angepasst werden
-		field = CentralStyleGenerator.generateGameField(this,grid_col,grid_row);
-	
+		field = CentralStyleGenerator.generateGameField(this, grid_col,
+				grid_row);
+
 		// add gestures
 		Context ctx = this;
 		SwipeGesture gesture = new SwipeGesture(this) {
 
 			public void onSwipeRight() {
-				MoveMenu.enlargeMenu(swipeInMenu,ctx);
+				MoveMenu.enlargeMenu(swipeInMenu, ctx);
 			}
 
 			public void onSwipeLeft() {
-				MoveMenu.minimizeMenu(swipeInMenu,ctx);
+				MoveMenu.minimizeMenu(swipeInMenu, ctx);
 			}
 
 			public void onSwipeTop() {
@@ -102,80 +94,76 @@ public class GameGui extends Activity  {
 		mainLayout.addView(swipeInMenu);
 		mainLayout.addView(center);
 		center.addView(field);
-		
+
 		AdView adView = new AdView(this);
 		adView.setAdSize(AdSize.SMART_BANNER);
 		adView.setAdUnitId("ca-app-pub-9906233160008931/6838748603");
-		
-		 center.addView(adView);
-		 AdRequest adRequest = new AdRequest.Builder().build();
-		 adView.loadAd(adRequest);
-	
-		
-		for(int i = 0; i < grid_col * grid_row ;i++){
+
+		center.addView(adView);
+		AdRequest adRequest = new AdRequest.Builder().build();
+		adView.loadAd(adRequest);
+
+		for (int i = 0; i < grid_col * grid_row; i++) {
 			String name = "" + i;
 			BlockPanel temp = addBlockPanel(EnumColor.CYAN);
 			temp.setText(name);
 			temp.setOnTouchListener(gesture);
 			field.addView(temp);
-			
+
 		}
 
 	}
-	
-	public BlockPanel addBlockPanel(EnumColor color){
-		
-		BlockPanel panel = CentralStyleGenerator.generateBlockPanel(this, color, grid_col);
+
+	public BlockPanel addBlockPanel(EnumColor color) {
+
+		BlockPanel panel = CentralStyleGenerator.generateBlockPanel(this,
+				color, grid_col);
 		panel.setOnClickListener(generateOnClickListener(panel));
-//		field.addView(panel);
+		// field.addView(panel);
 		return panel;
 	}
-	
-	
-	public View.OnClickListener generateOnClickListener(BlockPanel panel){
+
+	public View.OnClickListener generateOnClickListener(BlockPanel panel) {
 		final BlockPanel panel_pan = panel;
 		final Context cont = this;
 		View.OnClickListener listener = new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				BlockPanel pan = panel_pan;
 				Context con = cont;
 				control.action(pan, con);
-				
+
 			}
 		};
-		
+
 		return listener;
 	}
 
-	
 	@Override
-	  public void onResume() {
-	    super.onResume();
-	    if (adView != null) {
-	      adView.resume();
-	    }
-	  }
+	public void onResume() {
+		super.onResume();
+		if (adView != null) {
+			adView.resume();
+		}
+	}
 
-	  @Override
-	  public void onPause() {
-	    if (adView != null) {
-	      adView.pause();
-	    }
-	    super.onPause();
-	  }
+	@Override
+	public void onPause() {
+		if (adView != null) {
+			adView.pause();
+		}
+		super.onPause();
+	}
 
-	  /** Called before the activity is destroyed. */
-	  @Override
-	  public void onDestroy() {
-	    // Destroy the AdView.
-	    if (adView != null) {
-	      adView.destroy();
-	    }
-	    super.onDestroy();
-	  }
-
-
+	/** Called before the activity is destroyed. */
+	@Override
+	public void onDestroy() {
+		// Destroy the AdView.
+		if (adView != null) {
+			adView.destroy();
+		}
+		super.onDestroy();
+	}
 
 }

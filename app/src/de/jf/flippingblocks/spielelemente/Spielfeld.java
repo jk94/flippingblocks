@@ -2,27 +2,29 @@ package de.jf.flippingblocks.spielelemente;
 
 import java.util.ArrayList;
 
+import de.jf.flippingblocks.Control;
 import de.jf.flippingblocks.Enum.EnumColor;
 import de.jf.flippingblocks.graphics.BlockPanel;
-import java.awt.Color;
+
 
 public class Spielfeld {
 
     private ArrayList<Spalte> collist;
-    private int borderX, borderY;
-    private Color[] c = {Color.BLACK, Color.BLUE, Color.green, Color.RED};
+    private final int borderX, borderY;
+    private Control cnt;
+   
 
-    public Spielfeld(int sizex, int sizey) {
+    public Spielfeld(int sizex, int sizey, Control control) {
         borderX = sizex;
         borderY = sizey;
+        this.cnt = control;
         collist = new ArrayList<Spalte>(borderX);
         for (int i = 0; i < borderX; i++) {
             collist.add(new Spalte(borderY));
             for (int t = 0; t < borderY; t++) {
-                int color = (int) ((Math.random() * c.length - 1));
+                int color = (int) ((Math.random() * EnumColor.values().length - 1));
                 //Block b = new Block(EnumColor.values()[color], null);
-                Block b = new Block(c[color], null);
-                b.setColor(EnumColor.values()[color]);
+                Block b = new Block(EnumColor.values()[color], cnt.getGameGui().addBlockPanel(EnumColor.values()[color]));
                 collist.get(i).addBlock(b);
             }
         }
