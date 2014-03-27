@@ -19,6 +19,8 @@ public class Block {
 
 	public void setColor(EnumColor color) {
 		this.color = color;
+		btn.changeColor(this.color);
+		
 	}
 
 	public Block(int color) {
