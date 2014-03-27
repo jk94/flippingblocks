@@ -50,7 +50,8 @@ public class GameGui extends Activity {
 
 		grid_col = this.getIntent().getExtras().getInt("col");
 		grid_row = this.getIntent().getExtras().getInt("row");
-		control = new Control(this, grid_col, grid_row);
+		
+		
 
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
@@ -64,6 +65,8 @@ public class GameGui extends Activity {
 		field = CentralStyleGenerator.generateGameField(this, grid_col,
 				grid_row);
 
+
+		control = new Control(this, grid_col, grid_row);
 		// add gestures
 		Context ctx = this;
 		SwipeGesture gesture = new SwipeGesture(this) {
