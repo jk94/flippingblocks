@@ -35,7 +35,7 @@ public class Control{
 	}
 	
 	public void action(BlockPanel panel , Context context ){
-		System.out.println(panel.getText());
+		
 	}
 	
 	

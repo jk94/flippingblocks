@@ -23,17 +23,20 @@ public class SwipeGesture implements OnTouchListener {
 
         @Override
         public boolean onDown(MotionEvent e) {
+        	
         	return false;
         }
         
         
         public boolean onTouchEvent(View arg0, MotionEvent arg1){
+        	System.out.println("touch");
         	return false;
         }
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            boolean result = false;
+           System.out.println("fling");
+        	boolean result = false;
             try {
                 float diffY = e2.getY() - e1.getY();
                 float diffX = e2.getX() - e1.getX();

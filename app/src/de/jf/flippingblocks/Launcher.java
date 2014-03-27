@@ -103,6 +103,9 @@ public class Launcher extends Activity implements OnClickListener {
 		edit_col = new EditText(this);
 		edit_row = new EditText(this);
 		
+		edit_col.setOnTouchListener(gesture);
+		edit_row.setOnTouchListener(gesture);
+		
 		edit_col.setTextColor(Color.CYAN);
 		edit_row.setTextColor(Color.CYAN);
 		
