@@ -22,7 +22,7 @@ public class Spalte {
     public Spalte(int leng) {
         this.visible_length = leng;
         this.length = leng + 1;
-        this.list = new ArrayList<>();
+        this.list = new ArrayList<Block>();
     }
 
     public int getVisible_length() {
@@ -90,7 +90,6 @@ public class Spalte {
         }
         return false;
     }
-private Color[] c = {Color.BLACK, Color.BLUE, Color.green, Color.RED};
     // F�llt das Spielfeld wieder mit Bl�cken auf
     //TODO Referenzen f�r Buttons auf GUI
     public void fillWithBlocks() {
