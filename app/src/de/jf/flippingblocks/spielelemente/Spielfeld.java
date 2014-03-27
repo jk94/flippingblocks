@@ -33,14 +33,16 @@ public class Spielfeld {
     //Gibt den Block zur�ck, zu dem der (geklickte) Button (Referenz) geh�rt.
     public Block getBlockByBtnRef(BlockPanel b) {
         Block erg = null;
+        boolean found = false;
         for (Spalte y : collist) {
             for (Block bl : y.getSpalte()) {
                 if (bl.getBtn().equals(b)) {
                     erg = bl;
+                    found = true;
                     break;
                 }
             }
-            if (!erg.equals(null)) {
+            if (found) {
                 break;
             }
         }
