@@ -1,12 +1,14 @@
 package de.jf.flippingblocks;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 import de.jf.flippingblocks.gameGui.GameGui;
 import de.jf.flippingblocks.graphics.BlockPanel;
+import de.jf.flippingblocks.spielelemente.Block;
 import de.jf.flippingblocks.spielelemente.Spielfeld;
 
 
@@ -35,6 +37,9 @@ public class Control{
 	}
 	
 	public void action(BlockPanel panel , Context context ){
+		ArrayList<Block> liste = new ArrayList<Block>();
+		feld.CheckMate(liste, feld.getBlockByBtnRef(panel), feld.getBlockByBtnRef(panel).getColor());
+		feld.destroyBlocks(liste);
 		
 	}
 	
