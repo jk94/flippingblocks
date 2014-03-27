@@ -100,19 +100,9 @@ public class Launcher extends Activity implements OnClickListener {
 		sideMenuContent.addView(CentralStyleGenerator.generateButton(this, "Share", null, true));
 		sideMenuContent.addView(CentralStyleGenerator.generateButton(this, "Highscores", null, true));
 		
-		edit_col = new EditText(this);
-		edit_row = new EditText(this);
+	
 		
-		edit_col.setOnTouchListener(gesture);
-		edit_row.setOnTouchListener(gesture);
-		
-		edit_col.setTextColor(Color.CYAN);
-		edit_row.setTextColor(Color.CYAN);
-		
-		mainContent.addView(edit_col);
-		mainContent.addView(edit_row);
-		
-		mainContent.addView(CentralStyleGenerator.generateButton(this, "Start", generateModusListener(0, 0),false));
+		mainContent.addView(CentralStyleGenerator.generateButton(this, "Start", generateModusListener(7, 9),false));
 		
 		
 	}
@@ -175,9 +165,8 @@ public class Launcher extends Activity implements OnClickListener {
 			@Override
 			public void onClick(View v) {
 				// TODO muss wieder geändert werden
-				int col_n= Integer.valueOf(edit_col.getText().toString());
-				int row_n= Integer.valueOf(edit_row.getText().toString()); 
-				startNewGame(col_n , row_n);
+				
+				startNewGame(col , row);
 				
 			}
 		};
