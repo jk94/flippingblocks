@@ -39,17 +39,13 @@ public class Spielfeld {
 	// geh�rt.
 	public Block getBlockByBtnRef(BlockPanel b) {
 		Block erg = null;
-		boolean found = false;
 		for (Spalte y : collist) {
 			for (Block bl : y.getSpalte()) {
 				if (bl.getBtn().equals(b)) {
 					erg = bl;
-					found = true;
-					break;
+					System.out.println(erg);
+					return erg;
 				}
-			}
-			if (found) {
-				break;
 			}
 		}
 		return erg;

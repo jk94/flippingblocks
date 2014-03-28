@@ -6,6 +6,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
+import android.animation.TimeAnimator.TimeListener;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
@@ -15,6 +16,8 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import de.jf.flippingblocks.Control;
 import de.jf.flippingblocks.R;
 
@@ -26,15 +29,23 @@ import de.jf.flippingblocks.graphics.CentralStyleGenerator;
 
 public class GameGui extends Activity {
 
-	GridLayout mainLayout;
-	LinearLayout swipeInMenu;
-	LinearLayout center;
-	GridLayout field;
+	private GridLayout mainLayout;
+	private LinearLayout swipeInMenu;
+	private LinearLayout center;
+	private LinearLayout hudContainer;
+	private GridLayout field;
+	private TextView currentScore;
+	private ProgressBar timeBar;
+
+
+	private Control control;
+	private AdView adView;
+	
 	private int grid_col;
 	private int grid_row;
-
-	Control control;
-	AdView adView;
+	
+	// bestimmt das maximum der fortschrittsanzeige
+	private final int maxprogress = 100;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,6 +75,11 @@ public class GameGui extends Activity {
 		// muss an dem modus angepasst werden
 		field = CentralStyleGenerator.generateGameField(this, grid_col,
 				grid_row);
+		hudContainer = CentralStyleGenerator.generateHudContainer(this);
+		currentScore = CentralStyleGenerator.generateTextView(this, "999999");
+		timeBar = CentralStyleGenerator.generateProgressBar(this, maxprogress);
+		
+		
 
 
 		control = new Control(this, grid_col, grid_row);
@@ -90,24 +106,42 @@ public class GameGui extends Activity {
 		mainLayout.setOnTouchListener(gesture);
 		swipeInMenu.setOnTouchListener(gesture);
 		field.setOnTouchListener(gesture);
-
+		center.setOnTouchListener(gesture);
 		// add components
 
 		this.setContentView(mainLayout);
 		mainLayout.addView(swipeInMenu);
 		mainLayout.addView(center);
-		center.addView(field);
-
+		
 		AdView adView = new AdView(this);
 		adView.setAdSize(AdSize.SMART_BANNER);
 		adView.setAdUnitId("ca-app-pub-9906233160008931/6838748603");
 
 		center.addView(adView);
+		
+		center.addView(field);
+		
+		center.addView(hudContainer);
+
+		hudContainer.addView(currentScore);
+		hudContainer.addView(timeBar);
+
+		
 		AdRequest adRequest = new AdRequest.Builder().build();
 		adView.loadAd(adRequest);
 
 		
 
+	}
+	
+	public void setCurrenScore(int value){
+		
+		currentScore.setText(""+ value);
+		
+	}
+	
+	public void setTimeBar(int value){
+		timeBar.setProgress(value);
 	}
 
 	public BlockPanel addBlockPanel(EnumColor color) {

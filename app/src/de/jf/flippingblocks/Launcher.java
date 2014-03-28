@@ -31,6 +31,7 @@ public class Launcher extends Activity implements OnClickListener {
 	SwipeGesture gestureListener;
 	EditText edit_col ;
 	EditText edit_row ;
+	boolean menu_expanded = false;
 	
 	
 	// muss dringend dynamisch gemacht werden
@@ -64,12 +65,16 @@ public class Launcher extends Activity implements OnClickListener {
 
 			@Override
 			public void onSwipeRight() {
+				System.out.println("right");
 				MoveMenu.enlargeMenu(sideMenuContent, ctx);
+				menu_expanded = true;
 			}
 
 			@Override
 			public void onSwipeLeft() {
+				System.out.println("left");
 				MoveMenu.minimizeMenu(sideMenuContent,ctx);
+				menu_expanded = false;
 			}
 
 			@Override
@@ -131,18 +136,21 @@ public class Launcher extends Activity implements OnClickListener {
 		LayoutParams temp = sideMenuContent.getLayoutParams();
 		
 
-		if (temp.width != CentralStyleGenerator.getMenuWidthHidden(this)) {
+		if (menu_expanded) {
+			
 			ResizeAnimation animation = new ResizeAnimation(sideMenuContent,
 					(temp.width), (temp.height), CentralStyleGenerator.getMenuWidthHidden(this),
 					(temp.height));
 			sideMenuContent.startAnimation(animation);
+			menu_expanded = false;
 
 		} else {
-
+			
 			ResizeAnimation animation = new ResizeAnimation(sideMenuContent,
 					(temp.width), (temp.height), CentralStyleGenerator.getMenuWidthExpanded(this),
 					(temp.height));
 			sideMenuContent.startAnimation(animation);
+			menu_expanded = true;
 
 		}
 	}

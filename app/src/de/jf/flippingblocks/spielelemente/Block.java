@@ -11,6 +11,7 @@ public class Block {
 	public Block(EnumColor color, BlockPanel b) {
 		this.color = color;
 		this.btn = b;
+		//this.setBtn(b);
 	}
 
 	public EnumColor getColor() {
@@ -19,8 +20,7 @@ public class Block {
 
 	public void setColor(EnumColor color) {
 		this.color = color;
-		btn.changeColor(this.color);
-		
+		btn.changeColor(this.color);	
 	}
 
 	public Block(int color) {
@@ -34,6 +34,7 @@ public class Block {
 
 	public void setBtn(BlockPanel btn) {
 		this.btn = btn;
+		this.btn.changeColor(this.color);
 	}
 
 }
