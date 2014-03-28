@@ -1,12 +1,9 @@
-import de.jf.flippingblocks.Enum.EnumColor;
-import de.jf.flippingblocks.spielelemente.Block;
-import de.jf.flippingblocks.spielelemente.Spalte;
-import de.jf.flippingblocks.spielelemente.Spielfeld;
-
 import java.awt.Graphics;
 import java.util.ArrayList;
 
-import javax.swing.JLabel;
+import de.jf.flippingblocks.spielelemente.Block;
+import de.jf.flippingblocks.spielelemente.Spalte;
+import de.jf.flippingblocks.spielelemente.Spielfeld;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -26,7 +23,7 @@ public class runner extends javax.swing.JFrame {
 
 	public runner() {
 		initComponents();
-		feld = new Spielfeld(6, 6);
+		feld = new Spielfeld(6, 6, null);
 		zaehler = 0;
 	}
 

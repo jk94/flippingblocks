@@ -11,7 +11,7 @@ public class Block {
 	public Block(EnumColor color, BlockPanel b) {
 		this.color = color;
 		this.btn = b;
-		//this.setBtn(b);
+		//this.setBtn(b);+6
 	}
 
 	public EnumColor getColor() {
