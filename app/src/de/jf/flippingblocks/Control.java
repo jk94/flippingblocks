@@ -10,6 +10,7 @@ import de.jf.flippingblocks.gameGui.GameGui;
 import de.jf.flippingblocks.graphics.BlockPanel;
 import de.jf.flippingblocks.spielelemente.Block;
 import de.jf.flippingblocks.spielelemente.Spielfeld;
+import de.jf.flippingblocks.spielelemente.SpielfeldAnders;
 
 
 public class Control{
@@ -17,7 +18,7 @@ public class Control{
 	 * 
 	 */
 	
-	transient Spielfeld feld ;
+	transient SpielfeldAnders feld ;
 	transient int col;
 	transient int row;
 	public static int id = 0;
@@ -30,7 +31,7 @@ public class Control{
 		this.col = col;
 		this.row = row;
 		this.gui = gui;
-		feld = new Spielfeld(col, row, this);
+		feld = new SpielfeldAnders(this,col, row);
 		
 	}
 	
@@ -39,9 +40,11 @@ public class Control{
 	}
 	
 	public void action(BlockPanel panel , Context context ){
-		ArrayList<Block> liste = new ArrayList<Block>();
-		feld.CheckMate(liste, feld.getBlockByBtnRef(panel), feld.getBlockByBtnRef(panel).getColor());
-		feld.destroyBlocks(liste);
+//		ArrayList<Block> liste = new ArrayList<Block>();
+//		feld.CheckMate(liste, feld.getBlockByBtnRef(panel), feld.getBlockByBtnRef(panel).getColor());
+//		feld.destroyBlocks(liste);
+		
+		feld.click(panel);
 		
 	}
 	

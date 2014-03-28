@@ -106,8 +106,8 @@ public class Spalte {
 		try {
 			if (list.contains(BlockZumLoeschen)) {
 				int index = list.indexOf(BlockZumLoeschen);
-				Block neuerBlock = new Block(list.get(list.size() - 1)
-						.getColor(), list.get(list.size() - 1).getBtn());
+				int color = (int) ((Math.random() * EnumColor.values().length - 1));
+				Block neuerBlock = new Block(EnumColor.values()[color], list.get(list.size() - 1).getBtn());
 				schiebeRefBisBlock(BlockZumLoeschen);
 				list.remove(index);
 				this.addBlock(neuerBlock);

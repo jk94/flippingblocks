@@ -59,6 +59,7 @@ public class BlockPanel extends Button {
 		this.color = color;
 		this.getBackground().setColorFilter(Color.parseColor(color.name()),
 				PorterDuff.Mode.LIGHTEN);
+		
 	}
 
 	public EnumColor getColor() {

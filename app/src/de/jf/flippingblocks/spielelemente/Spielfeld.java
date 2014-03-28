@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import de.jf.flippingblocks.Control;
 import de.jf.flippingblocks.Enum.EnumColor;
+import de.jf.flippingblocks.gameGui.GameGui;
 import de.jf.flippingblocks.graphics.BlockPanel;
 
 public class Spielfeld {
@@ -26,11 +27,19 @@ public class Spielfeld {
 				collist.get(i).addBlock(b);
 			}
 		}
+		System.out.println(collist.size());
 		for (int i = 0; i < collist.size(); i++) {
+			
 			ArrayList<Block> sp = collist.get(i).getSpalte();
 			for (int t = sp.size() - 1; t >= 0; t--) {
-
-				sp.get(t).setBtn(cnt.getGameGui().addBlockPanel(sp.get(t).getColor()));
+				
+				Block tBlock = sp.get(t);
+				
+				GameGui gui = cnt.getGameGui();
+				
+				BlockPanel panel = gui.addBlockPanel(tBlock.getColor());
+				
+				tBlock.setBtn(panel);
 			}
 		}
 	}

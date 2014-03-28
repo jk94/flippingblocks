@@ -11,6 +11,9 @@ public class Block {
 	public Block(EnumColor color, BlockPanel b) {
 		this.color = color;
 		this.btn = b;
+		if(b != null){
+		this.btn.changeColor(color);
+		}
 		//this.setBtn(b);
 	}
 
