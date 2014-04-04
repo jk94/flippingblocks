@@ -25,6 +25,7 @@ import de.jf.flippingblocks.graphics.ResizeAnimation;
 public class Launcher extends Activity implements OnClickListener {
 
 	// defining Content Container
+	
 	GridLayout mainLayout;
 	LinearLayout mainContent;
 	LinearLayout sideMenuContent;
@@ -47,12 +48,13 @@ public class Launcher extends Activity implements OnClickListener {
 
 	public void initialise() {
 
+		
 		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
 		// defining ActionBar
 		this.getActionBar().setDisplayHomeAsUpEnabled(true);
 		this.getActionBar().setHomeButtonEnabled(true);
-		this.getActionBar().setTitle("Flipping Blocks");
+		this.getActionBar().setIcon(R.drawable.ic_menu_moreoverflow);
 		
 
 		// initialize the Layout

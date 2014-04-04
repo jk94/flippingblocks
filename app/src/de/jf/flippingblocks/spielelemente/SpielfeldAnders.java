@@ -9,144 +9,158 @@ import android.content.Context;
 
 public class SpielfeldAnders {
 	Control control;
-	int cols ;
-	int rows ;
-	Block[][] feld ;
-	
-	public SpielfeldAnders (Control cont, int cols , int rows){
+	int cols;
+	int rows;
+	Block[][] feld;
+
+	public SpielfeldAnders(Control cont, int cols, int rows) {
 		this.control = cont;
 		this.cols = cols;
 		this.rows = rows;
 		feld = new Block[rows][cols];
-		
-		for(int i = 0; i < rows; i++){
-			for(int j = 0; j < cols; j++){
-				
+
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++) {
+
 				int color = (int) ((Math.random() * EnumColor.values().length - 1));
-				feld[i][j] = new Block(EnumColor.values()[color], cont.getGameGui().addBlockPanel(EnumColor.values()[color]) );
-				
+				feld[i][j] = new Block(EnumColor.values()[color], cont
+						.getGameGui().addBlockPanel(EnumColor.values()[color]),
+						i, j);
+
 			}
-			
+
 		}
-	
-		
+
 	}
-	
-	public Block findBlockByRef(BlockPanel panel){
-		
+
+	public Block findBlockByRef(BlockPanel panel) {
+
 		Block block = null;
-		for (int i = 0; i < rows; i++){
-			for(int j = 0; j < cols; j++){
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++) {
 				BlockPanel temp = feld[i][j].getBtn();
-				if(temp.equals(panel)){
+				if (temp.equals(panel)) {
 					block = feld[i][j];
 					return block;
 				}
 			}
 		}
-		
+
 		return null;
 	}
-	
-	public ArrayList<Block> getButtonsArround(BlockPanel panel){
+
+	public ArrayList<Block> getButtonsArround(BlockPanel panel) {
 		Block temp = findBlockByRef(panel);
-		int x ;
-		int y ;
-		if (temp!=null){
-			// position feststellen
-			for(int i = 0 ; i < rows; i++){
-				for(int j =0 ; j < cols; j++){
-					if (feld[i][j] == temp){
-						x = i;
-						y = j;
-						return getButtonsArround(temp, x, y);
-					}
-					
-				}
+
+		if (temp != null) {
+
+			return getButtonsArround(temp, temp.getX(), temp.getY());
+
+		}
+
+		return null;
+
+	}
+
+	public void click(BlockPanel panel) {
+		ArrayList<Block> list = getButtonsArround(panel);
+
+		System.out.println(list.size());
+		if (list.size() >= 3) {
+			changeColorsOnBlocks(list);
+		}
+	}
+
+	private void changeColorsOnBlocks(ArrayList<Block> list) {
+		
+		
+		for (Block temp : list) {
+			int x = temp.getX();
+			int y = temp.getY();
+			boolean swapped = false;
+			Block swap= null;
+			
+			for(int i = x; i >= 1; i--){
+				Block two = feld[i][y];
 				
+				if (list.contains(two)){
+					continue;
+				}else{
+					swapped = true;
+					swap = two;
+					break;
+				}
 			}
 			
+			if (swapped){
+				swapBlockColor(temp, swap);
+				ArrayList<Block> tempList = new ArrayList<Block>();
+				tempList.add(swap);
+				changeColorsOnBlocks(tempList);
+				
+				
+				
+				
+			}else{
+				int color = (int) ((Math.random() * EnumColor.values().length - 1));
+				temp.setColor(EnumColor.values()[color]);
+			}
+
+				
+
+			}
 			
-		}
 		
-		return null;
-		
-		
-		
+
 	}
-	
-	public void click(BlockPanel panel){
-		ArrayList<Block> list = getButtonsArround(panel);
-		
-		System.out.println(list.size());
-		if(list.size() >= 3){
-		changeColorsOnBlocks(list);
-		}
+
+	private void swapBlockColor(Block one, Block two) {
+		one.setColor(two.getColor());
+
 	}
-	
-	private void changeColorsOnBlocks(ArrayList<Block> list){
-		for(Block x : list){
-			int color = (int) ((Math.random() * EnumColor.values().length - 1));
-			x.setColor(EnumColor.values()[color]);
-			x.getBtn().changeColor(EnumColor.values()[color]);
-			System.out.println(color);
-			
-		}
-		
-	}
-	
-	private ArrayList<Block> getButtonsArround(Block block, int x , int y){
-		ArrayList<Block>  list = new ArrayList<Block>();
-		
+
+	private ArrayList<Block> getButtonsArround(Block block, int x, int y) {
+		ArrayList<Block> list = new ArrayList<Block>();
+
 		generateList(list, block, x, y);
-		
+
 		return list;
-		
-		
-		
-		
-		
-		
+
 	}
-	
-	private boolean generateList(ArrayList<Block> list, Block block, int x , int y){
-		
-		
-		if (list.contains(feld[x][y])){
+
+	private boolean generateList(ArrayList<Block> list, Block block, int x,
+			int y) {
+
+		if (list.contains(feld[x][y])) {
 			return false;
 		}
-		
-		if(block.getColor() == feld[x][y].getColor()){
+
+		if (block.getColor() == feld[x][y].getColor()) {
 			list.add(feld[x][y]);
-			
-			if (x!= 0){
-				generateList(list, feld[x][y], x-1, y);
+
+			if (x != 0) {
+				generateList(list, feld[x][y], x - 1, y);
 			}
-			
-			if(x< rows-1){
-				generateList(list, feld[x][y], x+1, y);
+
+			if (x < rows - 1) {
+				generateList(list, feld[x][y], x + 1, y);
 			}
-			
-			if(y != 0){
-				generateList(list, feld[x][y], x, y-1);
+
+			if (y != 0) {
+				generateList(list, feld[x][y], x, y - 1);
 			}
-			
-			if(y< cols-1){
-				generateList(list, feld[x][y], x, y+1);
+
+			if (y < cols - 1) {
+				generateList(list, feld[x][y], x, y + 1);
 			}
-			
+
 			return true;
-		} else{
-		
-		return false;
-		
-		
-		
-		
+		} else {
+
+			return false;
+
 		}
-		
-		
+
 	}
-	
-	
+
 }
