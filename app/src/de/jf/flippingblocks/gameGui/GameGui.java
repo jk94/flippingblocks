@@ -43,6 +43,7 @@ public class GameGui extends Activity {
 	
 	private int grid_col;
 	private int grid_row;
+	private int score = 0;
 	
 	// bestimmt das maximum der fortschrittsanzeige
 	private final int maxprogress = 100;
@@ -135,8 +136,8 @@ public class GameGui extends Activity {
 	}
 	
 	public void setCurrenScore(int value){
-		
-		currentScore.setText(""+ value);
+		score = score + value;
+		currentScore.setText(""+ score);
 		
 	}
 	

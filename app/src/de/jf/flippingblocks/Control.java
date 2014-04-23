@@ -47,6 +47,14 @@ public class Control{
 		feld.click(panel);
 		
 	}
+
+	public void addScore(int size) {
+		double multiplier = 1.5;
+		
+		int score = (int) Math.pow(size, multiplier);
+		gui.setCurrenScore(score);
+		
+	}
 	
 	
 	

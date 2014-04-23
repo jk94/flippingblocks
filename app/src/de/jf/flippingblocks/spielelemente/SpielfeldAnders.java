@@ -64,10 +64,12 @@ public class SpielfeldAnders {
 
 	public void click(BlockPanel panel) {
 		ArrayList<Block> list = getButtonsArround(panel);
-
+		
+		
 		System.out.println(list.size());
 		if (list.size() >= 3) {
 			changeColorsOnBlocks(list);
+			control.getGameGui().setCurrenScore(list.size());
 		}
 	}
 
@@ -93,7 +95,7 @@ public class SpielfeldAnders {
 			}
 			
 			if (swapped){
-				swapBlockColor(temp, swap);
+				cloneColor(temp, swap);
 				ArrayList<Block> tempList = new ArrayList<Block>();
 				tempList.add(swap);
 				changeColorsOnBlocks(tempList);
@@ -114,7 +116,7 @@ public class SpielfeldAnders {
 
 	}
 
-	private void swapBlockColor(Block one, Block two) {
+	private void cloneColor(Block one, Block two) {
 		one.setColor(two.getColor());
 
 	}
