@@ -56,6 +56,7 @@ public class GameGui extends Activity {
 		setContentView(R.layout.activity_gamegui);
 
 		initialisiere();
+		control.startTimer();
 	}
 
 	public void initialisiere() {
@@ -77,7 +78,7 @@ public class GameGui extends Activity {
 		field = CentralStyleGenerator.generateGameField(this, grid_col,
 				grid_row);
 		hudContainer = CentralStyleGenerator.generateHudContainer(this);
-		currentScore = CentralStyleGenerator.generateTextView(this, "999999");
+		currentScore = CentralStyleGenerator.generateTextView(this, "0");
 		timeBar = CentralStyleGenerator.generateProgressBar(this, maxprogress);
 		
 		
@@ -142,7 +143,13 @@ public class GameGui extends Activity {
 	}
 	
 	public void setTimeBar(int value){
+		if(value>=timeBar.getMax()){
+			timeBar.setProgress(timeBar.getMax());
+			control.GameOver();
+		}else{
 		timeBar.setProgress(value);
+		System.out.println(timeBar.getMax());
+		}
 	}
 
 	public BlockPanel addBlockPanel(EnumColor color) {

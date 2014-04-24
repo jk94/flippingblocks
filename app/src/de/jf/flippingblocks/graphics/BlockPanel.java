@@ -72,9 +72,9 @@ public class BlockPanel extends Button {
 		case BLACK:
 			erg = Color.BLACK;
 			break;
-		case CYAN:
+		/*case CYAN:
 			erg = Color.CYAN;
-			break;
+			break;*/
 		case GRAY:
 			erg = Color.GRAY;
 			break;

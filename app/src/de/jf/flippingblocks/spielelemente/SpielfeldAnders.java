@@ -64,58 +64,83 @@ public class SpielfeldAnders {
 
 	public void click(BlockPanel panel) {
 		ArrayList<Block> list = getButtonsArround(panel);
-		
-		
+
 		System.out.println(list.size());
 		if (list.size() >= 3) {
 			changeColorsOnBlocks(list);
+
 			
 			//
 			control.addScore(list.size());
+
+			control.getGameGui().setCurrenScore(list.size());
+			if(!checkPossibilities()){
+				//REPAINT
+				repaintFeld();
+			}
+
 		}
 	}
 
+	private void repaintFeld(){
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++) {
+
+				int color = (int) ((Math.random() * EnumColor.values().length - 1));
+				feld[i][j].setColor(EnumColor.values()[color]);
+			}
+
+		}
+	}
+	
 	private void changeColorsOnBlocks(ArrayList<Block> list) {
-		
-		
+
 		for (Block temp : list) {
 			int x = temp.getX();
 			int y = temp.getY();
 			boolean swapped = false;
-			Block swap= null;
-			
-			for(int i = x; i >= 1; i--){
+			Block swap = null;
+
+			for (int i = x; i >= 1; i--) {
 				Block two = feld[i][y];
-				
-				if (list.contains(two)){
+
+				if (list.contains(two)) {
 					continue;
-				}else{
+				} else {
 					swapped = true;
 					swap = two;
 					break;
 				}
 			}
-			
-			if (swapped){
+
+			if (swapped) {
 				cloneColor(temp, swap);
 				ArrayList<Block> tempList = new ArrayList<Block>();
 				tempList.add(swap);
 				changeColorsOnBlocks(tempList);
-				
-				
-				
-				
-			}else{
+
+			} else {
 				int color = (int) ((Math.random() * EnumColor.values().length - 1));
 				temp.setColor(EnumColor.values()[color]);
 			}
 
-				
+		}
 
+	}
+
+	private boolean checkPossibilities() {
+		ArrayList<Block> blocks = null;
+		boolean found = false;
+		for (int i = 0; i < feld.length; i++) {
+			for (int i2 = 0; i2 < feld[i].length; i2++) {
+				blocks = getButtonsArround(feld[i][i2], i, i2);
+				if (blocks.size() >= 3) {
+					found = true;
+					return found;
+				}
 			}
-			
-		
-
+		}
+		return false;
 	}
 
 	private void cloneColor(Block one, Block two) {
