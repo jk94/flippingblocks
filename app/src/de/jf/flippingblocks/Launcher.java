@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -62,7 +61,7 @@ public class Launcher extends Activity implements OnClickListener {
 		mainContent =CentralStyleGenerator.generateLauncherField(this);
 		sideMenuContent = CentralStyleGenerator.generateSideMenu(this);
 		
-		Context ctx = this;
+		//Context ctx = this;
 		SwipeGesture gesture = new SwipeGesture(this) {
 
 			@Override

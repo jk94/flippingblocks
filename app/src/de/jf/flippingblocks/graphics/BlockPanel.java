@@ -15,10 +15,10 @@ public class BlockPanel extends Button {
 	private final int s_margin_left = 10;
 	private final int s_margin_top = 10;
 	private final int s_margin_bottom = 10;
-	private int active_margin_right;
+	/*private int active_margin_right;
 	private int active_margin_left;
 	private int active_margin_top;
-	private int active_margin_bottom;
+	private int active_margin_bottom;*/
 
 	private EnumColor color;
 

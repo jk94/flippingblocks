@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import de.jf.flippingblocks.Control;
 import de.jf.flippingblocks.Enum.EnumColor;
 import de.jf.flippingblocks.graphics.BlockPanel;
-import android.content.Context;
 
 public class SpielfeldAnders {
 	Control control;

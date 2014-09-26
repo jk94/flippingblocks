@@ -1,26 +1,22 @@
 package de.jf.flippingblocks.gameGui;
 
-import java.io.Serializable;
-
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
-
-import android.animation.TimeAnimator.TimeListener;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+
 import de.jf.flippingblocks.Control;
 import de.jf.flippingblocks.R;
-
 import de.jf.flippingblocks.Enum.EnumColor;
 import de.jf.flippingblocks.gestures.MoveMenu;
 import de.jf.flippingblocks.gestures.SwipeGesture;
@@ -86,7 +82,7 @@ public class GameGui extends Activity {
 
 		control = new Control(this, grid_col, grid_row);
 		// add gestures
-		Context ctx = this;
+		//Context ctx = this;
 		SwipeGesture gesture = new SwipeGesture(this) {
 
 			public void onSwipeRight() {

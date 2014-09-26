@@ -5,13 +5,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
-import android.graphics.drawable.ClipDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RoundRectShape;
 import android.view.Display;
 import android.view.Gravity;
-import android.view.TextureView;
-import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
@@ -20,13 +15,8 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import de.jf.flippingblocks.Enum.EnumColor;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-
-import de.jf.flippingblocks.Enum.EnumColor;
 
 public class CentralStyleGenerator {
 	// This class offers the chance to generate gui_elements, so that every
