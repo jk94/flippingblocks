@@ -67,11 +67,17 @@ public class SpielfeldAnders {
 		System.out.println(list.size());
 		if (list.size() >= 3) {
 			changeColorsOnBlocks(list);
+
+			
+			//
+			control.addScore(list.size());
+
 			control.getGameGui().setCurrenScore(list.size());
 			if(!checkPossibilities()){
 				//REPAINT
 				repaintFeld();
 			}
+
 		}
 	}
 
